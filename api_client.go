@@ -39,6 +39,13 @@ var (
 	xmlCheck  = regexp.MustCompile("(?i:[application|text]/xml)")
 )
 
+type PolicyAPIs struct {
+	DistributedFirewallApi *DistributedFirewallApiService
+	GroupsApi              *GroupsApiService
+	RealizedStateApi       *RealizedStateApiService
+	TraceflowApi           *TraceflowApiService
+}
+
 // APIClient manages communication with the NSX API API v1.0.0
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
@@ -77,6 +84,8 @@ type APIClient struct {
 	ContainerInventoryApi           *ManagementPlaneApiFabricContainerInventoryApiService
 	ContainerProjectsApi            *ManagementPlaneApiFabricContainerProjectsApiService
 	ClusterControlPlaneApi          *SystemAdministrationPolicyClusterControlPlaneApiService
+	// Policy APIs
+	Policy *PolicyAPIs
 }
 
 type service struct {
@@ -282,6 +291,36 @@ func NewAPIClient(cfg *Configuration) (*APIClient, error) {
 	c.ContainerInventoryApi = (*ManagementPlaneApiFabricContainerInventoryApiService)(&c.common)
 	c.ContainerProjectsApi = (*ManagementPlaneApiFabricContainerProjectsApiService)(&c.common)
 	c.ClusterControlPlaneApi = (*SystemAdministrationPolicyClusterControlPlaneApiService)(&c.common)
+	return c, nil
+}
+
+// NewPolicyAPIClient creates a new API client. Requires a userAgent string describing your application.
+// optionally a custom http.Client to allow for advanced features such as caching.
+func NewPolicyAPIClient(cfg *Configuration) (*APIClient, error) {
+
+	if cfg.HTTPClient == nil {
+		err := InitHttpClient(cfg)
+
+		if cfg.HTTPClient == nil {
+			return nil, err
+		}
+	}
+
+	c := &APIClient{}
+	c.cfg = cfg
+	c.Context = GetContext(cfg)
+	c.common.client = c
+	err := GetDefaultHeaders(c)
+	if err != nil {
+		return nil, err
+	}
+
+	// Policy API Services
+	c.Policy = &PolicyAPIs{}
+	c.Policy.DistributedFirewallApi = (*DistributedFirewallApiService)(&c.common)
+	c.Policy.GroupsApi = (*GroupsApiService)(&c.common)
+	c.Policy.RealizedStateApi = (*RealizedStateApiService)(&c.common)
+	c.Policy.TraceflowApi = (*TraceflowApiService)(&c.common)
 	return c, nil
 }
 
