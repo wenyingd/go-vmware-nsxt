@@ -39,6 +39,8 @@ type ContainerIngressPolicy struct {
 	ContainerProjectId string `json:"container_project_id,omitempty"`
 	// Identifier of the container ingress policy.
 	ExternalId string `json:"external_id"`
+	// Specifies list for ingress points for the load balancer.
+	LoadBalanceIngress []ContainerLoadBalancerIngress `json:"load_balance_ingress,omitempty"`
 	// List of network errors related to container ingress.
 	NetworkErrors []common.NetworkError `json:"network_errors,omitempty"`
 	// Network status of container ingress.

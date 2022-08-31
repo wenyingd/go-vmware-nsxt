@@ -33,19 +33,25 @@ type ContainerCluster struct {
 	Scope []DiscoveredResourceScope `json:"scope,omitempty"`
 	// Opaque identifiers meaningful to the API user
 	Tags []common.Tag `json:"tags,omitempty"`
-	// Type of the container cluster. In case of creating container cluster first time, it is expected to pass the valid cluster-type. In case of update, if there is no change in cluster-type, then this field can be omitted in the request. 
+	// In case of Kubernetes container cluster, it specifies CIDRs that will be assigned to services created on Kubernetes.
+	ClusterIpRanges []string `json:"cluster_ip_ranges,omitempty"`
+	// Type of the container cluster. In case of creating container cluster first time, it is expected to pass the valid cluster-type. In case of update, if there is no change in cluster-type, then this field can be omitted in the request.
 	ClusterType string `json:"cluster_type,omitempty"`
 	// Specifies Container Network Interface type for container cluster.
 	CniType string `json:"cni_type,omitempty"`
 	// External identifier of the container cluster.
 	ExternalId string `json:"external_id,omitempty"`
-	// Details of underlying infrastructure that hosts the container cluster. In case of creating container cluster first time, it is expected to pass the valid infrastructure. In case of update, if there is no change in cluster-type, then this field can be omitted in the request. 
+	// Details of underlying infrastructure that hosts the container cluster. In case of creating container cluster first time, it is expected to pass the valid infrastructure. In case of update, if there is no change in cluster-type, then this field can be omitted in the request.
 	Infrastructure *ContainerInfrastructureInfo `json:"infrastructure,omitempty"`
 	// List of network errors related to container cluster.
 	NetworkErrors []common.NetworkError `json:"network_errors,omitempty"`
 	// Network status of container cluster.
 	NetworkStatus string `json:"network_status,omitempty"`
-	// Array of additional specific properties of container cluster in key-value format. 
+	// Specifies the port range to be used for NodePortLocal services.
+	NodePortLocalRange string `json:"node_port_local_range,omitempty"`
+	// In case of Kubernetes container cluster, it specifies port range to be used for Kubernetes services created with the type NodePort.
+	NodePortRange string `json:"node_port_range,omitempty"`
+	// Array of additional specific properties of container cluster in key-value format.
 	OriginProperties []common.KeyValuePair `json:"origin_properties,omitempty"`
 	// Specifies supervisor container project identifier for cluster.
 	SupervisorProjectId string `json:"supervisor_project_id,omitempty"`

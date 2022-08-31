@@ -35,14 +35,24 @@ type ContainerApplication struct {
 	ContainerClusterId string `json:"container_cluster_id,omitempty"`
 	// Identifier of the project which this container application belongs to.
 	ContainerProjectId string `json:"container_project_id,omitempty"`
-	// Identifier of the container application on container cluster e.g. PCF app id, k8s service id. 
+	// The IPv4 and IPv6 clusterIPs of the container application.
+	ClusterIps []string `json:"cluster_ips,omitempty"`
+	// Identifier of the container application on container cluster e.g. PCF app id, k8s service id.
 	ExternalId string `json:"external_id"`
+	// Specifies list of load-balancer ingress points
+	LoadBalancerIngress []ContainerLoadBalancerIngress `json:"load_balancer_ingress,omitempty"`
 	// List of network errors related to container application.
 	NetworkErrors []common.NetworkError `json:"network_errors,omitempty"`
 	// Network status of container application.
 	NetworkStatus string `json:"network_status,omitempty"`
-	// Array of additional specific properties of container application in key-value format. 
+	// Specifies list of local endpoint, when service is NodePortLocal.
+	NodePortLocalEndpoints []NodePortLocalEndpoint `json:"node_port_local_endpoints,omitempty"`
+	// Array of additional specific properties of container application in key-value format.
 	OriginProperties []common.KeyValuePair `json:"origin_properties,omitempty"`
+	// Specifies list of service port.
+	ServicePorts []ContainerServicePort `json:"service_ports,omitempty"`
 	// Status of the container application.
 	Status string `json:"status,omitempty"`
+	// Type of container application
+	Type string `json:"type,omitempty"`
 }

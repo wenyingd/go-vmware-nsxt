@@ -1006,3 +1006,614 @@ func (a *ManagementPlaneApiFabricContainerClustersApiService) ListContainerNetwo
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
+/*
+ManagementPlaneApiFabricContainerClustersApiService Returns an egress details
+Returns information about a specific egress.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param egressId
+
+@return ContainerEgress
+*/
+func (a *ManagementPlaneApiFabricContainerClustersApiService) GetContainerEgress(ctx context.Context, egressId string) (containerinventory.ContainerEgress, *http.Response, error) {
+	var (
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
+		localVarReturnValue containerinventory.ContainerEgress
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/fabric/container-egress/{egress-id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"egress-id"+"}", fmt.Sprintf("%v", egressId), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		var v ApiError
+		err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+ManagementPlaneApiFabricContainerClustersApiService Returns an container gateway
+Returns information about a specific container gateway.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param gatewayId
+
+@return ContainerGateway
+*/
+func (a *ManagementPlaneApiFabricContainerClustersApiService) GetContainerGateway(ctx context.Context, gatewayId string) (containerinventory.ContainerGateway, *http.Response, error) {
+	var (
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
+		localVarReturnValue containerinventory.ContainerGateway
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/fabric/container-gateway/{gateway-id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway-id"+"}", fmt.Sprintf("%v", gatewayId), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		var v ApiError
+		err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+ManagementPlaneApiFabricContainerClustersApiService Returns an container ip pool
+Returns information about a specific container ip pool.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ipPoolId
+
+@return ContainerIpPool
+*/
+func (a *ManagementPlaneApiFabricContainerClustersApiService) GetContainerIpPool(ctx context.Context, ipPoolId string) (containerinventory.ContainerIpPool, *http.Response, error) {
+	var (
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
+		localVarReturnValue containerinventory.ContainerIpPool
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/fabric/container-ip-pool/{ip-pool-id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"ip-pool-id"+"}", fmt.Sprintf("%v", ipPoolId), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		var v ApiError
+		err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+ManagementPlaneApiFabricContainerClustersApiService Return the List of Container Egress
+Returns information about all egress.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *ContainerClustersApiListContainerEgressOpts - Optional Parameters:
+     * @param "ContainerClusterId" (optional.String) -  Identifier of the container cluster
+     * @param "Cursor" (optional.String) -  Opaque cursor to be used for getting next page of records (supplied by current result page)
+     * @param "IncludedFields" (optional.String) -  Comma separated list of fields that should be included in query result
+     * @param "PageSize" (optional.Int64) -  Maximum number of results to return in this page (server may return fewer)
+     * @param "ScopeId" (optional.String) -  Scope id for container cluster
+     * @param "SortAscending" (optional.Bool) -
+     * @param "SortBy" (optional.String) -  Field by which records are sorted
+
+@return ContainerEgressListResult
+*/
+
+type ContainerClustersApiListContainerEgressOpts struct {
+	ContainerClusterId optional.String
+	Cursor             optional.String
+	IncludedFields     optional.String
+	PageSize           optional.Int64
+	ScopeId            optional.String
+	SortAscending      optional.Bool
+	SortBy             optional.String
+}
+
+func (a *ManagementPlaneApiFabricContainerClustersApiService) ListContainerEgress(ctx context.Context, localVarOptionals *ContainerClustersApiListContainerEgressOpts) (containerinventory.ContainerEgressListResult, *http.Response, error) {
+	var (
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
+		localVarReturnValue containerinventory.ContainerEgressListResult
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/fabric/container-egresses"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.ContainerClusterId.IsSet() {
+		localVarQueryParams.Add("container_cluster_id", parameterToString(localVarOptionals.ContainerClusterId.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Cursor.IsSet() {
+		localVarQueryParams.Add("cursor", parameterToString(localVarOptionals.Cursor.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.IncludedFields.IsSet() {
+		localVarQueryParams.Add("included_fields", parameterToString(localVarOptionals.IncludedFields.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PageSize.IsSet() {
+		localVarQueryParams.Add("page_size", parameterToString(localVarOptionals.PageSize.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.ScopeId.IsSet() {
+		localVarQueryParams.Add("scope_id", parameterToString(localVarOptionals.ScopeId.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SortAscending.IsSet() {
+		localVarQueryParams.Add("sort_ascending", parameterToString(localVarOptionals.SortAscending.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SortBy.IsSet() {
+		localVarQueryParams.Add("sort_by", parameterToString(localVarOptionals.SortBy.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		var v ApiError
+		err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+ManagementPlaneApiFabricContainerClustersApiService Return the List of container gateway
+Returns information about all container gateways.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *ContainerClustersApiListContainerGatewayOpts - Optional Parameters:
+     * @param "ContainerClusterId" (optional.String) -  Identifier of the container cluster
+     * @param "ContainerProjectId" (optional.String) -  Identifier of the container project
+     * @param "Cursor" (optional.String) -  Opaque cursor to be used for getting next page of records (supplied by current result page)
+     * @param "IncludedFields" (optional.String) -  Comma separated list of fields that should be included in query result
+     * @param "PageSize" (optional.Int64) -  Maximum number of results to return in this page (server may return fewer)
+     * @param "ScopeId" (optional.String) -  Scope id for container cluster
+     * @param "SortAscending" (optional.Bool) -
+     * @param "SortBy" (optional.String) -  Field by which records are sorted
+
+@return ContainerGatewayListResult
+*/
+
+type ContainerClustersApiListContainerGatewayOpts struct {
+	ContainerClusterId optional.String
+	ContainerProjectId optional.String
+	Cursor             optional.String
+	IncludedFields     optional.String
+	PageSize           optional.Int64
+	ScopeId            optional.String
+	SortAscending      optional.Bool
+	SortBy             optional.String
+}
+
+func (a *ManagementPlaneApiFabricContainerClustersApiService) ListContainerGateway(ctx context.Context, localVarOptionals *ContainerClustersApiListContainerGatewayOpts) (containerinventory.ContainerGatewayListResult, *http.Response, error) {
+	var (
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
+		localVarReturnValue containerinventory.ContainerGatewayListResult
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/fabric/container-gateways"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.ContainerClusterId.IsSet() {
+		localVarQueryParams.Add("container_cluster_id", parameterToString(localVarOptionals.ContainerClusterId.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.ContainerProjectId.IsSet() {
+		localVarQueryParams.Add("container_project_id", parameterToString(localVarOptionals.ContainerProjectId.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Cursor.IsSet() {
+		localVarQueryParams.Add("cursor", parameterToString(localVarOptionals.Cursor.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.IncludedFields.IsSet() {
+		localVarQueryParams.Add("included_fields", parameterToString(localVarOptionals.IncludedFields.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PageSize.IsSet() {
+		localVarQueryParams.Add("page_size", parameterToString(localVarOptionals.PageSize.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.ScopeId.IsSet() {
+		localVarQueryParams.Add("scope_id", parameterToString(localVarOptionals.ScopeId.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SortAscending.IsSet() {
+		localVarQueryParams.Add("sort_ascending", parameterToString(localVarOptionals.SortAscending.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SortBy.IsSet() {
+		localVarQueryParams.Add("sort_by", parameterToString(localVarOptionals.SortBy.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		var v ApiError
+		err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+ManagementPlaneApiFabricContainerClustersApiService Return the List of Container ip pool
+Returns information about all container ip pools.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *ContainerClustersApiListContainerIpPoolOpts - Optional Parameters:
+     * @param "ContainerClusterId" (optional.String) -  Identifier of the container cluster
+     * @param "Cursor" (optional.String) -  Opaque cursor to be used for getting next page of records (supplied by current result page)
+     * @param "IncludedFields" (optional.String) -  Comma separated list of fields that should be included in query result
+     * @param "PageSize" (optional.Int64) -  Maximum number of results to return in this page (server may return fewer)
+     * @param "ScopeId" (optional.String) -  Scope id for container cluster
+     * @param "SortAscending" (optional.Bool) -
+     * @param "SortBy" (optional.String) -  Field by which records are sorted
+
+@return ContainerIpPoolListResult
+*/
+
+type ContainerClustersApiListContainerIpPoolOpts struct {
+	ContainerClusterId optional.String
+	Cursor             optional.String
+	IncludedFields     optional.String
+	PageSize           optional.Int64
+	ScopeId            optional.String
+	SortAscending      optional.Bool
+	SortBy             optional.String
+}
+
+func (a *ManagementPlaneApiFabricContainerClustersApiService) ListContainerIpPool(ctx context.Context, localVarOptionals *ContainerClustersApiListContainerIpPoolOpts) (containerinventory.ContainerIpPoolListResult, *http.Response, error) {
+	var (
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
+		localVarReturnValue containerinventory.ContainerIpPoolListResult
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/fabric/container-ip-pools"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.ContainerClusterId.IsSet() {
+		localVarQueryParams.Add("container_cluster_id", parameterToString(localVarOptionals.ContainerClusterId.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Cursor.IsSet() {
+		localVarQueryParams.Add("cursor", parameterToString(localVarOptionals.Cursor.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.IncludedFields.IsSet() {
+		localVarQueryParams.Add("included_fields", parameterToString(localVarOptionals.IncludedFields.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PageSize.IsSet() {
+		localVarQueryParams.Add("page_size", parameterToString(localVarOptionals.PageSize.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.ScopeId.IsSet() {
+		localVarQueryParams.Add("scope_id", parameterToString(localVarOptionals.ScopeId.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SortAscending.IsSet() {
+		localVarQueryParams.Add("sort_ascending", parameterToString(localVarOptionals.SortAscending.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SortBy.IsSet() {
+		localVarQueryParams.Add("sort_by", parameterToString(localVarOptionals.SortBy.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		var v ApiError
+		err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}

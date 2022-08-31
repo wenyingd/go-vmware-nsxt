@@ -35,6 +35,8 @@ type ContainerClusterNode struct {
 	CniAgentStatus string `json:"cni_agent_status,omitempty"`
 	// External identifier of the container cluster.
 	ContainerClusterId string `json:"container_cluster_id,omitempty"`
+	// Specifies list of external ip address of Node.
+	ExternalIpAddresses []string `json:"external_ip_addresses,omitempty"`
 	// External identifier of the container cluster node in K8S/PAS. 
 	ExternalId string `json:"external_id"`
 	// List of IP addresses of container cluster node.
@@ -45,6 +47,8 @@ type ContainerClusterNode struct {
 	NetworkStatus string `json:"network_status,omitempty"`
 	// Array of additional specific properties of container cluster node in key-value format. 
 	OriginProperties []common.KeyValuePair `json:"origin_properties,omitempty"`
+	// In case of Kubernetes container cluster, it represents the IP ranges assigned to the node for usage by Pod on that node.
+	PodCidrs []string `json:"pod_cidrs,omitempty"`
 	// Specifies identifier of container cluster node given by infrastructure provider of container cluster. e.g. in case of vSpehere, it will be instance uuid of worker node virtual machine.
 	ProviderId string `json:"provider_id,omitempty"`
 }
