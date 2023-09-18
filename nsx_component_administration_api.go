@@ -12,6 +12,7 @@ import (
 	"github.com/vmware/go-vmware-nsxt/administration"
 	"github.com/vmware/go-vmware-nsxt/manager"
 	"github.com/vmware/go-vmware-nsxt/trust"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
@@ -24,11 +25,14 @@ var (
 
 type NsxComponentAdministrationApiService service
 
-/* NsxComponentAdministrationApiService Add a New Certificate
+/*
+	NsxComponentAdministrationApiService Add a New Certificate
+
 Adds a new private-public certificate or a chain of certificates (CAs) and, optionally, a private key that can be applied to one of the user-facing components (appliance management or edge). The certificate and the key should be stored in PEM format. If no private key is provided, the certificate is used as a client certificate in the trust store.
 * @param ctx context.Context Authentication Context
 @param trustObjectData
-@return trust.CertificateList*/
+@return trust.CertificateList
+*/
 func (a *NsxComponentAdministrationApiService) AddCertificateImport(ctx context.Context, trustObjectData trust.TrustObjectData) (trust.CertificateList, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -87,12 +91,15 @@ func (a *NsxComponentAdministrationApiService) AddCertificateImport(ctx context.
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Add a Node to the Cluster
+/*
+	NsxComponentAdministrationApiService Add a Node to the Cluster
+
 Adds a new management node or controller node to the NSX cluster. A single node can perform one role, either management or control, not both.
 * @param ctx context.Context Authentication Context
 @param addClusterNodeSpec
 @param action
-@return administration.ClusterNodeConfig*/
+@return administration.ClusterNodeConfig
+*/
 func (a *NsxComponentAdministrationApiService) AddClusterNode(ctx context.Context, addClusterNodeSpec administration.AddClusterNodeSpec, action string) (administration.ClusterNodeConfig, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -152,11 +159,14 @@ func (a *NsxComponentAdministrationApiService) AddClusterNode(ctx context.Contex
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Add a New Certificate Revocation List
+/*
+	NsxComponentAdministrationApiService Add a New Certificate Revocation List
+
 Adds a new certificate revocation list (CRL). The CRL is used to verify the client certificate status against the revocation lists published by the CA. For this reason, the administrator needs to add the CRL in certificate repository as well.
 * @param ctx context.Context Authentication Context
 @param crlObjectData
-@return trust.CrlList*/
+@return trust.CrlList
+*/
 func (a *NsxComponentAdministrationApiService) AddCrlImport(ctx context.Context, crlObjectData trust.CrlObjectData) (trust.CrlList, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -215,12 +225,15 @@ func (a *NsxComponentAdministrationApiService) AddCrlImport(ctx context.Context,
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Add SSH public key to authorized_keys file for node user
+/*
+	NsxComponentAdministrationApiService Add SSH public key to authorized_keys file for node user
+
 Add SSH public key to authorized_keys file for node user
 * @param ctx context.Context Authentication Context
 @param userid User id of the user
 @param sshKeyProperties
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) AddNodeUserSshKeyAddSshKey(ctx context.Context, userid string, sshKeyProperties administration.SshKeyProperties) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -275,11 +288,14 @@ func (a *NsxComponentAdministrationApiService) AddNodeUserSshKeyAddSshKey(ctx co
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Advance any suspended restore operation
+/*
+	NsxComponentAdministrationApiService Advance any suspended restore operation
+
 Advance any currently suspended restore operation. The operation might have been suspended because (1) the user had suspended it previously, or (2) the operation is waiting for user input, to be provided as a part of the POST request body. This operation is only valid when a GET cluster/restore/status returns a status with value SUSPENDED. Otherwise, a 409 response is returned.
 * @param ctx context.Context Authentication Context
 @param advanceClusterRestoreRequest
-@return administration.ClusterRestoreStatus*/
+@return administration.ClusterRestoreStatus
+*/
 func (a *NsxComponentAdministrationApiService) AdvanceClusterRestoreAdvance(ctx context.Context, advanceClusterRestoreRequest administration.AdvanceClusterRestoreRequest) (administration.ClusterRestoreStatus, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -338,11 +354,14 @@ func (a *NsxComponentAdministrationApiService) AdvanceClusterRestoreAdvance(ctx 
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Cancel specified task
+/*
+	NsxComponentAdministrationApiService Cancel specified task
+
 Cancel specified task
 * @param ctx context.Context Authentication Context
 @param taskId ID of task to delete
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) CancelApplianceManagementTaskCancel(ctx context.Context, taskId string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -395,10 +414,13 @@ func (a *NsxComponentAdministrationApiService) CancelApplianceManagementTaskCanc
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Cancel any running restore operation
+/*
+	NsxComponentAdministrationApiService Cancel any running restore operation
+
 Cancel any currently running restore operation. If there exists a currently running step, it is allowed to finish. The system is not rolled back to the pre-restore state. This operation is only valid when a GET cluster/restore/status returns a status with value RUNNING or SUSPENDED. Otherwise, a 409 response is returned.
 * @param ctx context.Context Authentication Context
-@return administration.ClusterRestoreStatus*/
+@return administration.ClusterRestoreStatus
+*/
 func (a *NsxComponentAdministrationApiService) CancelClusterRestoreCancel(ctx context.Context) (administration.ClusterRestoreStatus, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -455,10 +477,13 @@ func (a *NsxComponentAdministrationApiService) CancelClusterRestoreCancel(ctx co
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Check if RabbitMQ management port is enabled or not
+/*
+	NsxComponentAdministrationApiService Check if RabbitMQ management port is enabled or not
+
 Returns status as true if RabbitMQ management port is enabled else false
 * @param ctx context.Context Authentication Context
-@return manager.PortStatus*/
+@return manager.PortStatus
+*/
 func (a *NsxComponentAdministrationApiService) CheckRabbitMQManagementPort(ctx context.Context) (manager.PortStatus, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -515,13 +540,18 @@ func (a *NsxComponentAdministrationApiService) CheckRabbitMQManagementPort(ctx c
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Collect support bundles from registered cluster and fabric nodes
+/*
+	NsxComponentAdministrationApiService Collect support bundles from registered cluster and fabric nodes
+
 Collect support bundles from registered cluster and fabric nodes.
 * @param ctx context.Context Authentication Context
 @param supportBundleRequest
 @param optional (nil or map[string]interface{}) with one or more of:
-    @param "overrideAsyncResponse" (bool) Override any existing support bundle async response
-@return administration.SupportBundleResult*/
+
+	@param "overrideAsyncResponse" (bool) Override any existing support bundle async response
+
+@return administration.SupportBundleResult
+*/
 func (a *NsxComponentAdministrationApiService) CollectSupportBundlesCollect(ctx context.Context, supportBundleRequest administration.SupportBundleRequest, localVarOptionals map[string]interface{}) (administration.SupportBundleResult, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -587,11 +617,14 @@ func (a *NsxComponentAdministrationApiService) CollectSupportBundlesCollect(ctx 
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Configure backup
+/*
+	NsxComponentAdministrationApiService Configure backup
+
 Configure file server and timers for automated backup. If secret fields are omitted (password, passphrase) then use the previously set value.
 * @param ctx context.Context Authentication Context
 @param backupConfiguration
-@return administration.BackupConfiguration*/
+@return administration.BackupConfiguration
+*/
 func (a *NsxComponentAdministrationApiService) ConfigureBackupConfig(ctx context.Context, backupConfiguration administration.BackupConfiguration) (administration.BackupConfiguration, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
@@ -650,11 +683,14 @@ func (a *NsxComponentAdministrationApiService) ConfigureBackupConfig(ctx context
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Configure Restore SFTP server credentials
+/*
+	NsxComponentAdministrationApiService Configure Restore SFTP server credentials
+
 Configure file server where the backed-up files used for the Restore operation are available.
 * @param ctx context.Context Authentication Context
 @param restoreConfiguration
-@return administration.RestoreConfiguration*/
+@return administration.RestoreConfiguration
+*/
 func (a *NsxComponentAdministrationApiService) ConfigureRestoreConfig(ctx context.Context, restoreConfiguration administration.RestoreConfiguration) (administration.RestoreConfiguration, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
@@ -713,12 +749,15 @@ func (a *NsxComponentAdministrationApiService) ConfigureRestoreConfig(ctx contex
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Copy a remote file to the file store
+/*
+	NsxComponentAdministrationApiService Copy a remote file to the file store
+
 Copy a remote file to the file store. If you use scp or sftp, you must provide the remote server&#39;s SSH fingerprint. See the &lt;i&gt;NSX-T Administration Guide&lt;/i&gt; for information and instructions about finding the SSH fingerprint.
 * @param ctx context.Context Authentication Context
 @param fileName Destination filename
 @param copyFromRemoteFileProperties
-@return administration.FileProperties*/
+@return administration.FileProperties
+*/
 func (a *NsxComponentAdministrationApiService) CopyFromRemoteFileCopyFromRemoteFile(ctx context.Context, fileName string, copyFromRemoteFileProperties administration.CopyFromRemoteFileProperties) (administration.FileProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -778,12 +817,15 @@ func (a *NsxComponentAdministrationApiService) CopyFromRemoteFileCopyFromRemoteF
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Copy file in the file store to a remote file store
+/*
+	NsxComponentAdministrationApiService Copy file in the file store to a remote file store
+
 Copy a file in the file store to a remote server. If you use scp or sftp, you must provide the remote server&#39;s SSH fingerprint. See the &lt;i&gt;NSX-T Administration Guide&lt;/i&gt; for information and instructions about finding the SSH fingerprint.
 * @param ctx context.Context Authentication Context
 @param fileName Destination filename
 @param copyToRemoteFileProperties
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) CopyToRemoteFileCopyToRemoteFile(ctx context.Context, fileName string, copyToRemoteFileProperties administration.CopyToRemoteFileProperties) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -838,10 +880,13 @@ func (a *NsxComponentAdministrationApiService) CopyToRemoteFileCopyToRemoteFile(
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart the node management service
+/*
+	NsxComponentAdministrationApiService Restart the node management service
+
 Restart the node management service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateApplianceManagementServiceActionRestart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -898,10 +943,13 @@ func (a *NsxComponentAdministrationApiService) CreateApplianceManagementServiceA
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the manager service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the manager service
+
 Restart, start or stop the manager service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateCminventoryServiceActionRestart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -958,10 +1006,13 @@ func (a *NsxComponentAdministrationApiService) CreateCminventoryServiceActionRes
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the manager service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the manager service
+
 Restart, start or stop the manager service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateCminventoryServiceActionStart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -1018,10 +1069,13 @@ func (a *NsxComponentAdministrationApiService) CreateCminventoryServiceActionSta
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the manager service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the manager service
+
 Restart, start or stop the manager service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateCminventoryServiceActionStop(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -1078,11 +1132,14 @@ func (a *NsxComponentAdministrationApiService) CreateCminventoryServiceActionSto
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Upload a file to the file store
+/*
+	NsxComponentAdministrationApiService Upload a file to the file store
+
 When you issue this API, the client must specify: - HTTP header Content-Type:application/octet-stream. - Request body with the contents of the file in the filestore. In the CLI, you can view the filestore with the &lt;em&gt;get files&lt;/em&gt; command.
 * @param ctx context.Context Authentication Context
 @param fileName Destination filename
-@return administration.FileProperties*/
+@return administration.FileProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateFile(ctx context.Context, fileName string) (administration.FileProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -1140,10 +1197,13 @@ func (a *NsxComponentAdministrationApiService) CreateFile(ctx context.Context, f
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the liagent service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the liagent service
+
 Restart, start or stop the liagent service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateLiagentServiceActionRestart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -1200,10 +1260,13 @@ func (a *NsxComponentAdministrationApiService) CreateLiagentServiceActionRestart
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the liagent service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the liagent service
+
 Restart, start or stop the liagent service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateLiagentServiceActionStart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -1260,10 +1323,13 @@ func (a *NsxComponentAdministrationApiService) CreateLiagentServiceActionStart(c
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the liagent service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the liagent service
+
 Restart, start or stop the liagent service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateLiagentServiceActionStop(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -1320,10 +1386,13 @@ func (a *NsxComponentAdministrationApiService) CreateLiagentServiceActionStop(ct
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the NSX Message Bus service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the NSX Message Bus service
+
 Restart, start or stop the NSX Message Bus service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateNSXMessageBusServiceActionRestart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -1380,10 +1449,13 @@ func (a *NsxComponentAdministrationApiService) CreateNSXMessageBusServiceActionR
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the NSX Message Bus service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the NSX Message Bus service
+
 Restart, start or stop the NSX Message Bus service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateNSXMessageBusServiceActionStart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -1440,10 +1512,13 @@ func (a *NsxComponentAdministrationApiService) CreateNSXMessageBusServiceActionS
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the NSX Message Bus service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the NSX Message Bus service
+
 Restart, start or stop the NSX Message Bus service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateNSXMessageBusServiceActionStop(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -1500,10 +1575,13 @@ func (a *NsxComponentAdministrationApiService) CreateNSXMessageBusServiceActionS
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the NTP service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the NTP service
+
 Restart, start or stop the NTP service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateNTPServiceActionRestart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -1560,10 +1638,13 @@ func (a *NsxComponentAdministrationApiService) CreateNTPServiceActionRestart(ctx
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the NTP service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the NTP service
+
 Restart, start or stop the NTP service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateNTPServiceActionStart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -1620,10 +1701,13 @@ func (a *NsxComponentAdministrationApiService) CreateNTPServiceActionStart(ctx c
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the NTP service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the NTP service
+
 Restart, start or stop the NTP service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateNTPServiceActionStop(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -1680,11 +1764,14 @@ func (a *NsxComponentAdministrationApiService) CreateNTPServiceActionStop(ctx co
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Create node network route
+/*
+	NsxComponentAdministrationApiService Create node network route
+
 Add a route to the NSX Manager routing table. For static routes, the route_type, interface_id, netmask, and destination are required parameters. For default routes, the route_type, gateway address, and interface_id are required. For blackhole routes, the route_type and destination are required. All other parameters are optional. When you add a static route, the scope and route_id are created automatically. When you add a default or blackhole route, the route_id is created automatically. The route_id is read-only, meaning that it cannot be modified. All other properties can be modified by deleting and readding the route.
 * @param ctx context.Context Authentication Context
 @param nodeRouteProperties
-@return administration.NodeRouteProperties*/
+@return administration.NodeRouteProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateNodeNetworkRoute(ctx context.Context, nodeRouteProperties administration.NodeRouteProperties) (administration.NodeRouteProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -1743,10 +1830,13 @@ func (a *NsxComponentAdministrationApiService) CreateNodeNetworkRoute(ctx contex
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the NSX upgrade agent service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the NSX upgrade agent service
+
 Restart, start or stop the NSX upgrade agent service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateNsxUpgradeAgentServiceActionRestart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -1803,10 +1893,13 @@ func (a *NsxComponentAdministrationApiService) CreateNsxUpgradeAgentServiceActio
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the NSX upgrade agent service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the NSX upgrade agent service
+
 Restart, start or stop the NSX upgrade agent service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateNsxUpgradeAgentServiceActionStart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -1863,10 +1956,13 @@ func (a *NsxComponentAdministrationApiService) CreateNsxUpgradeAgentServiceActio
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the NSX upgrade agent service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the NSX upgrade agent service
+
 Restart, start or stop the NSX upgrade agent service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateNsxUpgradeAgentServiceActionStop(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -1923,10 +2019,13 @@ func (a *NsxComponentAdministrationApiService) CreateNsxUpgradeAgentServiceActio
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the manager service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the manager service
+
 Restart, start or stop the manager service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateProtonServiceActionRestart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -1983,10 +2082,13 @@ func (a *NsxComponentAdministrationApiService) CreateProtonServiceActionRestart(
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the manager service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the manager service
+
 Restart, start or stop the manager service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateProtonServiceActionStart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -2043,10 +2145,13 @@ func (a *NsxComponentAdministrationApiService) CreateProtonServiceActionStart(ct
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the manager service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the manager service
+
 Restart, start or stop the manager service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateProtonServiceActionStop(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -2103,10 +2208,13 @@ func (a *NsxComponentAdministrationApiService) CreateProtonServiceActionStop(ctx
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the http service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the http service
+
 Restart, start or stop the http service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateProxyServiceActionRestart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -2163,10 +2271,13 @@ func (a *NsxComponentAdministrationApiService) CreateProxyServiceActionRestart(c
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the http service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the http service
+
 Restart, start or stop the http service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateProxyServiceActionStart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -2223,10 +2334,13 @@ func (a *NsxComponentAdministrationApiService) CreateProxyServiceActionStart(ctx
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the http service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the http service
+
 Restart, start or stop the http service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateProxyServiceActionStop(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -2283,11 +2397,14 @@ func (a *NsxComponentAdministrationApiService) CreateProxyServiceActionStop(ctx 
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Update http service certificate
+/*
+	NsxComponentAdministrationApiService Update http service certificate
+
 Applies a security certificate to the http service. In the POST request, the CERTIFICATE_ID references a certificate created with the /api/v1/trust-management APIs. Issuing this request causes the http service to restart so that the service can begin using the new certificate. When the POST request succeeds, it doesn&#39;t return a valid response. The request times out because of the restart.
 * @param ctx context.Context Authentication Context
 @param certificateId Certificate ID
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) CreateProxyServiceApplyCertificateActionApplyCertificate(ctx context.Context, certificateId string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -2340,10 +2457,13 @@ func (a *NsxComponentAdministrationApiService) CreateProxyServiceApplyCertificat
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the Rabbit MQ service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the Rabbit MQ service
+
 Restart, start or stop the Rabbit MQ service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateRabbitMQServiceActionRestart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -2400,10 +2520,13 @@ func (a *NsxComponentAdministrationApiService) CreateRabbitMQServiceActionRestar
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the Rabbit MQ service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the Rabbit MQ service
+
 Restart, start or stop the Rabbit MQ service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateRabbitMQServiceActionStart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -2460,10 +2583,13 @@ func (a *NsxComponentAdministrationApiService) CreateRabbitMQServiceActionStart(
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the Rabbit MQ service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the Rabbit MQ service
+
 Restart, start or stop the Rabbit MQ service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateRabbitMQServiceActionStop(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -2520,11 +2646,14 @@ func (a *NsxComponentAdministrationApiService) CreateRabbitMQServiceActionStop(c
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Create directory in remote file server
+/*
+	NsxComponentAdministrationApiService Create directory in remote file server
+
 Create a directory on the remote remote server. Supports only SFTP. You must provide the remote server&#39;s SSH fingerprint. See the &lt;i&gt;NSX Administration Guide&lt;/i&gt; for information and instructions about finding the SSH fingerprint.
 * @param ctx context.Context Authentication Context
 @param createRemoteDirectoryProperties
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) CreateRemoteDirectoryCreateRemoteDirectory(ctx context.Context, createRemoteDirectoryProperties administration.CreateRemoteDirectoryProperties) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -2578,10 +2707,13 @@ func (a *NsxComponentAdministrationApiService) CreateRemoteDirectoryCreateRemote
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the NSX install-upgrade service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the NSX install-upgrade service
+
 Restart, start or stop the NSX install-upgrade service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateRepositoryServiceActionRestart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -2638,10 +2770,13 @@ func (a *NsxComponentAdministrationApiService) CreateRepositoryServiceActionRest
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the NSX install-upgrade service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the NSX install-upgrade service
+
 Restart, start or stop the NSX install-upgrade service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateRepositoryServiceActionStart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -2698,10 +2833,13 @@ func (a *NsxComponentAdministrationApiService) CreateRepositoryServiceActionStar
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the NSX install-upgrade service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the NSX install-upgrade service
+
 Restart, start or stop the NSX install-upgrade service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateRepositoryServiceActionStop(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -2758,10 +2896,13 @@ func (a *NsxComponentAdministrationApiService) CreateRepositoryServiceActionStop
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the SNMP service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the SNMP service
+
 Restart, start or stop the SNMP service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateSNMPServiceActionRestart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -2818,10 +2959,13 @@ func (a *NsxComponentAdministrationApiService) CreateSNMPServiceActionRestart(ct
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the SNMP service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the SNMP service
+
 Restart, start or stop the SNMP service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateSNMPServiceActionStart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -2878,10 +3022,13 @@ func (a *NsxComponentAdministrationApiService) CreateSNMPServiceActionStart(ctx 
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the SNMP service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the SNMP service
+
 Restart, start or stop the SNMP service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateSNMPServiceActionStop(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -2938,10 +3085,13 @@ func (a *NsxComponentAdministrationApiService) CreateSNMPServiceActionStop(ctx c
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the ssh service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the ssh service
+
 Restart, start or stop the ssh service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateSSHServiceActionRestart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -2998,10 +3148,13 @@ func (a *NsxComponentAdministrationApiService) CreateSSHServiceActionRestart(ctx
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the ssh service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the ssh service
+
 Restart, start or stop the ssh service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateSSHServiceActionStart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -3058,10 +3211,13 @@ func (a *NsxComponentAdministrationApiService) CreateSSHServiceActionStart(ctx c
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the ssh service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the ssh service
+
 Restart, start or stop the ssh service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateSSHServiceActionStop(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -3118,11 +3274,14 @@ func (a *NsxComponentAdministrationApiService) CreateSSHServiceActionStop(ctx co
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Remove a host&#39;s fingerprint from known hosts file
+/*
+	NsxComponentAdministrationApiService Remove a host&#39;s fingerprint from known hosts file
+
 Remove a host&#39;s fingerprint from known hosts file
 * @param ctx context.Context Authentication Context
 @param knownHostParameter
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) CreateSSHServiceRemoveHostFingerprintActionRemoveHostFingerprint(ctx context.Context, knownHostParameter administration.KnownHostParameter) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -3176,10 +3335,13 @@ func (a *NsxComponentAdministrationApiService) CreateSSHServiceRemoveHostFingerp
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the NSX Search service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the NSX Search service
+
 Restart, start or stop the NSX Search service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateSearchServiceActionRestart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -3236,10 +3398,13 @@ func (a *NsxComponentAdministrationApiService) CreateSearchServiceActionRestart(
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the NSX Search service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the NSX Search service
+
 Restart, start or stop the NSX Search service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateSearchServiceActionStart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -3296,10 +3461,13 @@ func (a *NsxComponentAdministrationApiService) CreateSearchServiceActionStart(ct
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the NSX Search service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the NSX Search service
+
 Restart, start or stop the NSX Search service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateSearchServiceActionStop(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -3356,10 +3524,13 @@ func (a *NsxComponentAdministrationApiService) CreateSearchServiceActionStop(ctx
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the syslog service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the syslog service
+
 Restart, start or stop the syslog service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateSyslogServiceActionRestart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -3416,10 +3587,13 @@ func (a *NsxComponentAdministrationApiService) CreateSyslogServiceActionRestart(
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the syslog service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the syslog service
+
 Restart, start or stop the syslog service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateSyslogServiceActionStart(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -3476,10 +3650,13 @@ func (a *NsxComponentAdministrationApiService) CreateSyslogServiceActionStart(ct
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart, start or stop the syslog service
+/*
+	NsxComponentAdministrationApiService Restart, start or stop the syslog service
+
 Restart, start or stop the syslog service
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) CreateSyslogServiceActionStop(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -3536,10 +3713,13 @@ func (a *NsxComponentAdministrationApiService) CreateSyslogServiceActionStop(ctx
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Delete RabbitMQ management port
+/*
+	NsxComponentAdministrationApiService Delete RabbitMQ management port
+
 Delete RabbitMQ management port
 * @param ctx context.Context Authentication Context
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) DELETERabbitMQManagementPort(ctx context.Context) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
@@ -3591,11 +3771,14 @@ func (a *NsxComponentAdministrationApiService) DELETERabbitMQManagementPort(ctx 
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Delete task
+/*
+	NsxComponentAdministrationApiService Delete task
+
 Delete task
 * @param ctx context.Context Authentication Context
 @param taskId ID of task to delete
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) DeleteApplianceManagementTask(ctx context.Context, taskId string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
@@ -3648,11 +3831,14 @@ func (a *NsxComponentAdministrationApiService) DeleteApplianceManagementTask(ctx
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Delete Certificate for the Given Certificate ID
+/*
+	NsxComponentAdministrationApiService Delete Certificate for the Given Certificate ID
+
 Removes the specified certificate. The private key associated with the certificate is also deleted.
 * @param ctx context.Context Authentication Context
 @param certId ID of certificate to delete
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) DeleteCertificate(ctx context.Context, certId string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
@@ -3705,11 +3891,14 @@ func (a *NsxComponentAdministrationApiService) DeleteCertificate(ctx context.Con
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Remove a Node from the Cluster
+/*
+	NsxComponentAdministrationApiService Remove a Node from the Cluster
+
 Removes the specified manager or control node from the NSX cluster. Before you can remove a node from the cluster, you must shut down the manager or controller service with the \&quot;stop service manager\&quot; or the \&quot;stop service controller\&quot; command.
 * @param ctx context.Context Authentication Context
 @param nodeId
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) DeleteClusterNodeConfig(ctx context.Context, nodeId string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
@@ -3762,11 +3951,14 @@ func (a *NsxComponentAdministrationApiService) DeleteClusterNodeConfig(ctx conte
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Delete a CRL
+/*
+	NsxComponentAdministrationApiService Delete a CRL
+
 Deletes an existing CRL.
 * @param ctx context.Context Authentication Context
 @param crlId ID of CRL to delete
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) DeleteCrl(ctx context.Context, crlId string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
@@ -3819,11 +4011,14 @@ func (a *NsxComponentAdministrationApiService) DeleteCrl(ctx context.Context, cr
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Delete file
+/*
+	NsxComponentAdministrationApiService Delete file
+
 Delete file
 * @param ctx context.Context Authentication Context
 @param fileName Name of the file to delete
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) DeleteFile(ctx context.Context, fileName string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
@@ -3876,11 +4071,14 @@ func (a *NsxComponentAdministrationApiService) DeleteFile(ctx context.Context, f
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Delete node network route
+/*
+	NsxComponentAdministrationApiService Delete node network route
+
 Delete a route from the NSX Manager routing table. You can modify an existing route by deleting it and then posting the modified version of the route. To verify, remove the route ID from the URI, issue a GET request, and note the absense of the deleted route.
 * @param ctx context.Context Authentication Context
 @param routeId ID of route to delete
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) DeleteNodeNetworkRoute(ctx context.Context, routeId string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
@@ -3933,11 +4131,14 @@ func (a *NsxComponentAdministrationApiService) DeleteNodeNetworkRoute(ctx contex
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Delete node syslog exporter
+/*
+	NsxComponentAdministrationApiService Delete node syslog exporter
+
 Removes a specified rule from the collection of syslog exporter rules.
 * @param ctx context.Context Authentication Context
 @param exporterName Name of syslog exporter to delete
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) DeleteNodeSyslogExporter(ctx context.Context, exporterName string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
@@ -3990,12 +4191,15 @@ func (a *NsxComponentAdministrationApiService) DeleteNodeSyslogExporter(ctx cont
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Remove SSH public key from authorized_keys file for node user
+/*
+	NsxComponentAdministrationApiService Remove SSH public key from authorized_keys file for node user
+
 Remove SSH public key from authorized_keys file for node user
 * @param ctx context.Context Authentication Context
 @param userid User id of the user
 @param sshKeyBaseProperties
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) DeleteNodeUserSshKeyRemoveSshKey(ctx context.Context, userid string, sshKeyBaseProperties administration.SshKeyBaseProperties) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -4050,11 +4254,14 @@ func (a *NsxComponentAdministrationApiService) DeleteNodeUserSshKeyRemoveSshKey(
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Delete a principal identity
+/*
+	NsxComponentAdministrationApiService Delete a principal identity
+
 Delete a principal identity. It does not delete the certificate.
 * @param ctx context.Context Authentication Context
 @param principalIdentityId Unique id of the principal identity to delete
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) DeletePrincipalIdentity(ctx context.Context, principalIdentityId string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
@@ -4107,10 +4314,13 @@ func (a *NsxComponentAdministrationApiService) DeletePrincipalIdentity(ctx conte
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Get backup configuration
+/*
+	NsxComponentAdministrationApiService Get backup configuration
+
 Get a configuration of a file server and timers for automated backup. Fields that contain secrets (password, passphrase) are not returned.
 * @param ctx context.Context Authentication Context
-@return administration.BackupConfiguration*/
+@return administration.BackupConfiguration
+*/
 func (a *NsxComponentAdministrationApiService) GetBackupConfig(ctx context.Context) (administration.BackupConfiguration, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -4167,10 +4377,13 @@ func (a *NsxComponentAdministrationApiService) GetBackupConfig(ctx context.Conte
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Get backup history
+/*
+	NsxComponentAdministrationApiService Get backup history
+
 Get history of previous backup operations
 * @param ctx context.Context Authentication Context
-@return administration.BackupOperationHistory*/
+@return administration.BackupOperationHistory
+*/
 func (a *NsxComponentAdministrationApiService) GetBackupHistory(ctx context.Context) (administration.BackupOperationHistory, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -4227,10 +4440,13 @@ func (a *NsxComponentAdministrationApiService) GetBackupHistory(ctx context.Cont
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Get backup status
+/*
+	NsxComponentAdministrationApiService Get backup status
+
 Get status of active backup operations
 * @param ctx context.Context Authentication Context
-@return administration.CurrentBackupOperationStatus*/
+@return administration.CurrentBackupOperationStatus
+*/
 func (a *NsxComponentAdministrationApiService) GetBackupStatus(ctx context.Context) (administration.CurrentBackupOperationStatus, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -4287,13 +4503,18 @@ func (a *NsxComponentAdministrationApiService) GetBackupStatus(ctx context.Conte
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Show Certificate Data for the Given Certificate ID
+/*
+	NsxComponentAdministrationApiService Show Certificate Data for the Given Certificate ID
+
 Returns information for the specified certificate ID, including the certificate&#39;s UUID; resource_type (for example, certificate_self_signed, certificate_ca, or certificate_signed); pem_encoded data; and history of the certificate (who created or modified it and when). For additional information, include the ?details&#x3D;true modifier at the end of the request URI.
 * @param ctx context.Context Authentication Context
 @param certId ID of certificate to read
 @param optional (nil or map[string]interface{}) with one or more of:
-    @param "details" (bool) whether to expand the pem data and show all its details
-@return trust.Certificate*/
+
+	@param "details" (bool) whether to expand the pem data and show all its details
+
+@return trust.Certificate
+*/
 func (a *NsxComponentAdministrationApiService) GetCertificate(ctx context.Context, certId string, localVarOptionals map[string]interface{}) (trust.Certificate, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -4358,17 +4579,22 @@ func (a *NsxComponentAdministrationApiService) GetCertificate(ctx context.Contex
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Return All the User-Facing Components&#39; Certificates
+/*
+	NsxComponentAdministrationApiService Return All the User-Facing Components&#39; Certificates
+
 Returns all certificate information viewable by the user, including each certificate&#39;s UUID; resource_type (for example, certificate_self_signed, certificate_ca, or certificate_signed); pem_encoded data; and history of the certificate (who created or modified it and when). For additional information, include the ?details&#x3D;true modifier at the end of the request URI.
 * @param ctx context.Context Authentication Context
 @param optional (nil or map[string]interface{}) with one or more of:
-    @param "cursor" (string) Opaque cursor to be used for getting next page of records (supplied by current result page)
-    @param "details" (bool) whether to expand the pem data and show all its details
-    @param "includedFields" (string) Comma separated list of fields that should be included to result of query
-    @param "pageSize" (int64) Maximum number of results to return in this page (server may return fewer)
-    @param "sortAscending" (bool)
-    @param "sortBy" (string) Field by which records are sorted
-@return trust.CertificateList*/
+
+	@param "cursor" (string) Opaque cursor to be used for getting next page of records (supplied by current result page)
+	@param "details" (bool) whether to expand the pem data and show all its details
+	@param "includedFields" (string) Comma separated list of fields that should be included to result of query
+	@param "pageSize" (int64) Maximum number of results to return in this page (server may return fewer)
+	@param "sortAscending" (bool)
+	@param "sortBy" (string) Field by which records are sorted
+
+@return trust.CertificateList
+*/
 func (a *NsxComponentAdministrationApiService) GetCertificates(ctx context.Context, localVarOptionals map[string]interface{}) (trust.CertificateList, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -4462,13 +4688,18 @@ func (a *NsxComponentAdministrationApiService) GetCertificates(ctx context.Conte
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Show CRL Data for the Given CRL ID
+/*
+	NsxComponentAdministrationApiService Show CRL Data for the Given CRL ID
+
 Returns information about the specified CRL. For additional information, include the ?details&#x3D;true modifier at the end of the request URI.
 * @param ctx context.Context Authentication Context
 @param crlId ID of CRL to read
 @param optional (nil or map[string]interface{}) with one or more of:
-    @param "details" (bool) whether to expand the pem data and show all its details
-@return trust.Crl*/
+
+	@param "details" (bool) whether to expand the pem data and show all its details
+
+@return trust.Crl
+*/
 func (a *NsxComponentAdministrationApiService) GetCrl(ctx context.Context, crlId string, localVarOptionals map[string]interface{}) (trust.Crl, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -4533,17 +4764,22 @@ func (a *NsxComponentAdministrationApiService) GetCrl(ctx context.Context, crlId
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Return All Added CRLs
+/*
+	NsxComponentAdministrationApiService Return All Added CRLs
+
 Returns information about all CRLs. For additional information, include the ?details&#x3D;true modifier at the end of the request URI.
 * @param ctx context.Context Authentication Context
 @param optional (nil or map[string]interface{}) with one or more of:
-    @param "cursor" (string) Opaque cursor to be used for getting next page of records (supplied by current result page)
-    @param "details" (bool) whether to expand the pem data and show all its details
-    @param "includedFields" (string) Comma separated list of fields that should be included to result of query
-    @param "pageSize" (int64) Maximum number of results to return in this page (server may return fewer)
-    @param "sortAscending" (bool)
-    @param "sortBy" (string) Field by which records are sorted
-@return trust.CrlList*/
+
+	@param "cursor" (string) Opaque cursor to be used for getting next page of records (supplied by current result page)
+	@param "details" (bool) whether to expand the pem data and show all its details
+	@param "includedFields" (string) Comma separated list of fields that should be included to result of query
+	@param "pageSize" (int64) Maximum number of results to return in this page (server may return fewer)
+	@param "sortAscending" (bool)
+	@param "sortBy" (string) Field by which records are sorted
+
+@return trust.CrlList
+*/
 func (a *NsxComponentAdministrationApiService) GetCrls(ctx context.Context, localVarOptionals map[string]interface{}) (trust.CrlList, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -4637,11 +4873,14 @@ func (a *NsxComponentAdministrationApiService) GetCrls(ctx context.Context, loca
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Get CSR PEM File for the Given CSR ID
+/*
+	NsxComponentAdministrationApiService Get CSR PEM File for the Given CSR ID
+
 Downloads the CSR PEM file for a specified CSR. Clients must include an Accept: text/plain request header.
 * @param ctx context.Context Authentication Context
 @param csrId ID of CSR to read
-@return string*/
+@return string
+*/
 func (a *NsxComponentAdministrationApiService) GetCsrPem(ctx context.Context, csrId string) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -4699,10 +4938,13 @@ func (a *NsxComponentAdministrationApiService) GetCsrPem(ctx context.Context, cs
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Gets the enable status for Mandatory Access Control
+/*
+	NsxComponentAdministrationApiService Gets the enable status for Mandatory Access Control
+
 Gets the enable status for Mandatory Access Control
 * @param ctx context.Context Authentication Context
-@return administration.MandatoryAccessControlProperties*/
+@return administration.MandatoryAccessControlProperties
+*/
 func (a *NsxComponentAdministrationApiService) GetNodeMandatoryAccessControl(ctx context.Context) (administration.MandatoryAccessControlProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -4759,10 +5001,13 @@ func (a *NsxComponentAdministrationApiService) GetNodeMandatoryAccessControl(ctx
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Get the report for Mandatory Access Control
+/*
+	NsxComponentAdministrationApiService Get the report for Mandatory Access Control
+
 Get the report for Mandatory Access Control
 * @param ctx context.Context Authentication Context
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) GetNodeMandatoryAccessControlReport(ctx context.Context) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -4814,10 +5059,13 @@ func (a *NsxComponentAdministrationApiService) GetNodeMandatoryAccessControlRepo
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Return the list of principal identities
+/*
+	NsxComponentAdministrationApiService Return the list of principal identities
+
 Returns the list of principals registered with a certificate.
 * @param ctx context.Context Authentication Context
-@return trust.PrincipalIdentityList*/
+@return trust.PrincipalIdentityList
+*/
 func (a *NsxComponentAdministrationApiService) GetPrincipalIdentities(ctx context.Context) (trust.PrincipalIdentityList, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -4874,10 +5122,13 @@ func (a *NsxComponentAdministrationApiService) GetPrincipalIdentities(ctx contex
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Get Restore configuration
+/*
+	NsxComponentAdministrationApiService Get Restore configuration
+
 Get configuration information for the file server used to store backed-up files. Fields that contain secrets (password, passphrase) are not returned.
 * @param ctx context.Context Authentication Context
-@return administration.RestoreConfiguration*/
+@return administration.RestoreConfiguration
+*/
 func (a *NsxComponentAdministrationApiService) GetRestoreConfig(ctx context.Context) (administration.RestoreConfiguration, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -4934,10 +5185,13 @@ func (a *NsxComponentAdministrationApiService) GetRestoreConfig(ctx context.Cont
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Return the Properties of a Trust Manager
+/*
+	NsxComponentAdministrationApiService Return the Properties of a Trust Manager
+
 Returns information about the supported algorithms and key sizes.
 * @param ctx context.Context Authentication Context
-@return trust.TrustManagementData*/
+@return trust.TrustManagementData
+*/
 func (a *NsxComponentAdministrationApiService) GetTrustObjects(ctx context.Context) (trust.TrustManagementData, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -4994,12 +5248,15 @@ func (a *NsxComponentAdministrationApiService) GetTrustObjects(ctx context.Conte
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Import a Certificate Associated with an Approved CSR
+/*
+	NsxComponentAdministrationApiService Import a Certificate Associated with an Approved CSR
+
 Imports a certificate authority (CA)-signed certificate for a CSR. This action links the certificate to the private key created by the CSR. The pem_encoded string in the request body is the signed certificate provided by your CA in response to the CSR that you provide to them. The import POST action automatically deletes the associated CSR.
 * @param ctx context.Context Authentication Context
 @param csrId CSR this certificate is associated with
 @param trustObjectData
-@return trust.CertificateList*/
+@return trust.CertificateList
+*/
 func (a *NsxComponentAdministrationApiService) ImportCertificateImport(ctx context.Context, csrId string, trustObjectData trust.TrustObjectData) (trust.CertificateList, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -5059,11 +5316,14 @@ func (a *NsxComponentAdministrationApiService) ImportCertificateImport(ctx conte
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Initiate a restore operation
+/*
+	NsxComponentAdministrationApiService Initiate a restore operation
+
 Start the restore of an NSX cluster, from some previously backed-up configuration. This operation is only valid when a GET cluster/restore/status returns a status with value NOT_STARTED. Otherwise, a 409 response is returned.
 * @param ctx context.Context Authentication Context
 @param initiateClusterRestoreRequest
-@return administration.ClusterRestoreStatus*/
+@return administration.ClusterRestoreStatus
+*/
 func (a *NsxComponentAdministrationApiService) InitiateClusterRestoreStart(ctx context.Context, initiateClusterRestoreRequest administration.InitiateClusterRestoreRequest) (administration.ClusterRestoreStatus, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -5122,17 +5382,22 @@ func (a *NsxComponentAdministrationApiService) InitiateClusterRestoreStart(ctx c
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService List appliance management tasks
+/*
+	NsxComponentAdministrationApiService List appliance management tasks
+
 List appliance management tasks
 * @param ctx context.Context Authentication Context
 @param optional (nil or map[string]interface{}) with one or more of:
-    @param "fields" (string) Fields to include in query results
-    @param "requestMethod" (string) Request method(s) to include in query result
-    @param "requestPath" (string) Request URI path(s) to include in query result
-    @param "requestUri" (string) Request URI(s) to include in query result
-    @param "status" (string) Status(es) to include in query result
-    @param "user" (string) Names of users to include in query result
-@return administration.ApplianceManagementTaskListResult*/
+
+	@param "fields" (string) Fields to include in query results
+	@param "requestMethod" (string) Request method(s) to include in query result
+	@param "requestPath" (string) Request URI path(s) to include in query result
+	@param "requestUri" (string) Request URI(s) to include in query result
+	@param "status" (string) Status(es) to include in query result
+	@param "user" (string) Names of users to include in query result
+
+@return administration.ApplianceManagementTaskListResult
+*/
 func (a *NsxComponentAdministrationApiService) ListApplianceManagementTasks(ctx context.Context, localVarOptionals map[string]interface{}) (administration.ApplianceManagementTaskListResult, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -5226,16 +5491,21 @@ func (a *NsxComponentAdministrationApiService) ListApplianceManagementTasks(ctx 
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService List timestamps of all available Cluster Backups.
+/*
+	NsxComponentAdministrationApiService List timestamps of all available Cluster Backups.
+
 Returns timestamps for all backup files that are available on the SFTP server.
 * @param ctx context.Context Authentication Context
 @param optional (nil or map[string]interface{}) with one or more of:
-    @param "cursor" (string) Opaque cursor to be used for getting next page of records (supplied by current result page)
-    @param "includedFields" (string) Comma separated list of fields that should be included to result of query
-    @param "pageSize" (int64) Maximum number of results to return in this page (server may return fewer)
-    @param "sortAscending" (bool)
-    @param "sortBy" (string) Field by which records are sorted
-@return administration.ClusterBackupInfoListResult*/
+
+	@param "cursor" (string) Opaque cursor to be used for getting next page of records (supplied by current result page)
+	@param "includedFields" (string) Comma separated list of fields that should be included to result of query
+	@param "pageSize" (int64) Maximum number of results to return in this page (server may return fewer)
+	@param "sortAscending" (bool)
+	@param "sortBy" (string) Field by which records are sorted
+
+@return administration.ClusterBackupInfoListResult
+*/
 func (a *NsxComponentAdministrationApiService) ListClusterBackupTimestamps(ctx context.Context, localVarOptionals map[string]interface{}) (administration.ClusterBackupInfoListResult, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -5323,16 +5593,21 @@ func (a *NsxComponentAdministrationApiService) ListClusterBackupTimestamps(ctx c
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService List Cluster Node Configurations
+/*
+	NsxComponentAdministrationApiService List Cluster Node Configurations
+
 Returns information about all NSX cluster nodes.
 * @param ctx context.Context Authentication Context
 @param optional (nil or map[string]interface{}) with one or more of:
-    @param "cursor" (string) Opaque cursor to be used for getting next page of records (supplied by current result page)
-    @param "includedFields" (string) Comma separated list of fields that should be included to result of query
-    @param "pageSize" (int64) Maximum number of results to return in this page (server may return fewer)
-    @param "sortAscending" (bool)
-    @param "sortBy" (string) Field by which records are sorted
-@return administration.ClusterNodeConfigListResult*/
+
+	@param "cursor" (string) Opaque cursor to be used for getting next page of records (supplied by current result page)
+	@param "includedFields" (string) Comma separated list of fields that should be included to result of query
+	@param "pageSize" (int64) Maximum number of results to return in this page (server may return fewer)
+	@param "sortAscending" (bool)
+	@param "sortBy" (string) Field by which records are sorted
+
+@return administration.ClusterNodeConfigListResult
+*/
 func (a *NsxComponentAdministrationApiService) ListClusterNodeConfigs(ctx context.Context, localVarOptionals map[string]interface{}) (administration.ClusterNodeConfigListResult, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -5420,13 +5695,18 @@ func (a *NsxComponentAdministrationApiService) ListClusterNodeConfigs(ctx contex
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService List the specified node&#39;s Network Interfaces
+/*
+	NsxComponentAdministrationApiService List the specified node&#39;s Network Interfaces
+
 Returns the number of interfaces on the node and detailed information about each interface. Interface information includes MTU, broadcast and host IP addresses, link and admin status, MAC address, network mask, and the IP configuration method (static or DHCP).
 * @param ctx context.Context Authentication Context
 @param nodeId
 @param optional (nil or map[string]interface{}) with one or more of:
-    @param "source" (string) Data source type.
-@return manager.NodeInterfacePropertiesListResult*/
+
+	@param "source" (string) Data source type.
+
+@return manager.NodeInterfacePropertiesListResult
+*/
 func (a *NsxComponentAdministrationApiService) ListClusterNodeInterfaces(ctx context.Context, nodeId string, localVarOptionals map[string]interface{}) (manager.NodeInterfacePropertiesListResult, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -5491,10 +5771,13 @@ func (a *NsxComponentAdministrationApiService) ListClusterNodeInterfaces(ctx con
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService List node files
+/*
+	NsxComponentAdministrationApiService List node files
+
 List node files
 * @param ctx context.Context Authentication Context
-@return administration.FilePropertiesListResult*/
+@return administration.FilePropertiesListResult
+*/
 func (a *NsxComponentAdministrationApiService) ListFiles(ctx context.Context) (administration.FilePropertiesListResult, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -5551,10 +5834,13 @@ func (a *NsxComponentAdministrationApiService) ListFiles(ctx context.Context) (a
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService List the NSX Manager&#39;s Network Interfaces
+/*
+	NsxComponentAdministrationApiService List the NSX Manager&#39;s Network Interfaces
+
 Returns the number of interfaces on the NSX Manager appliance and detailed information about each interface. Interface information includes MTU, broadcast and host IP addresses, link and admin status, MAC address, network mask, and the IP configuration method (static or DHCP).
 * @param ctx context.Context Authentication Context
-@return manager.NodeNetworkInterfacePropertiesListResult*/
+@return manager.NodeNetworkInterfacePropertiesListResult
+*/
 func (a *NsxComponentAdministrationApiService) ListNodeInterfaces(ctx context.Context) (manager.NodeNetworkInterfacePropertiesListResult, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -5611,10 +5897,13 @@ func (a *NsxComponentAdministrationApiService) ListNodeInterfaces(ctx context.Co
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService List node network routes
+/*
+	NsxComponentAdministrationApiService List node network routes
+
 Returns detailed information about each route in the NSX Manager routing table. Route information includes the route type (default, static, and so on), a unique route identifier, the route metric, the protocol from which the route was learned, the route source (which is the preferred egress interface), the route destination, and the route scope. The route scope refers to the distance to the destination network: The \&quot;host\&quot; scope leads to a destination address on the NSX Manager, such as a loopback address; the \&quot;link\&quot; scope leads to a destination on the local network; and the \&quot;global\&quot; scope leads to addresses that are more than one hop away.
 * @param ctx context.Context Authentication Context
-@return administration.NodeRoutePropertiesListResult*/
+@return administration.NodeRoutePropertiesListResult
+*/
 func (a *NsxComponentAdministrationApiService) ListNodeNetworkRoutes(ctx context.Context) (administration.NodeRoutePropertiesListResult, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -5671,10 +5960,13 @@ func (a *NsxComponentAdministrationApiService) ListNodeNetworkRoutes(ctx context
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService List node processes
+/*
+	NsxComponentAdministrationApiService List node processes
+
 Returns the number of processes and information about each process. Process information includes 1) mem_resident, which is roughly equivalent to the amount of RAM, in bytes, currently used by the process, 2) parent process ID (ppid), 3) process name, 4) process up time in milliseconds, 5) mem_used, wich is the amount of virtual memory used by the process, in bytes, 6) process start time, in milliseconds since epoch, 7) process ID (pid), 8) CPU time, both user and the system, consumed by the process in milliseconds.
 * @param ctx context.Context Authentication Context
-@return administration.NodeProcessPropertiesListResult*/
+@return administration.NodeProcessPropertiesListResult
+*/
 func (a *NsxComponentAdministrationApiService) ListNodeProcesses(ctx context.Context) (administration.NodeProcessPropertiesListResult, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -5731,10 +6023,13 @@ func (a *NsxComponentAdministrationApiService) ListNodeProcesses(ctx context.Con
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService List node services
+/*
+	NsxComponentAdministrationApiService List node services
+
 Returns a list of all services available on the NSX Manager applicance.
 * @param ctx context.Context Authentication Context
-@return administration.NodeServicePropertiesListResult*/
+@return administration.NodeServicePropertiesListResult
+*/
 func (a *NsxComponentAdministrationApiService) ListNodeServices(ctx context.Context) (administration.NodeServicePropertiesListResult, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -5791,10 +6086,13 @@ func (a *NsxComponentAdministrationApiService) ListNodeServices(ctx context.Cont
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService List node syslog exporters
+/*
+	NsxComponentAdministrationApiService List node syslog exporters
+
 Returns the collection of registered syslog exporter rules, if any. The rules specify the collector IP address and port, and the protocol to use.
 * @param ctx context.Context Authentication Context
-@return administration.NodeSyslogExporterPropertiesListResult*/
+@return administration.NodeSyslogExporterPropertiesListResult
+*/
 func (a *NsxComponentAdministrationApiService) ListNodeSyslogExporters(ctx context.Context) (administration.NodeSyslogExporterPropertiesListResult, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -5851,11 +6149,14 @@ func (a *NsxComponentAdministrationApiService) ListNodeSyslogExporters(ctx conte
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService List SSH keys from authorized_keys file for node user
+/*
+	NsxComponentAdministrationApiService List SSH keys from authorized_keys file for node user
+
 Returns a list of all SSH keys from authorized_keys file for node user
 * @param ctx context.Context Authentication Context
 @param userid User id of the user
-@return administration.SshKeyPropertiesListResult*/
+@return administration.SshKeyPropertiesListResult
+*/
 func (a *NsxComponentAdministrationApiService) ListNodeUserSshKeys(ctx context.Context, userid string) (administration.SshKeyPropertiesListResult, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -5913,10 +6214,13 @@ func (a *NsxComponentAdministrationApiService) ListNodeUserSshKeys(ctx context.C
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService List node users
+/*
+	NsxComponentAdministrationApiService List node users
+
 Returns the list of users configued to log in to the NSX Manager appliance.
 * @param ctx context.Context Authentication Context
-@return manager.NodeUserPropertiesListResult*/
+@return manager.NodeUserPropertiesListResult
+*/
 func (a *NsxComponentAdministrationApiService) ListNodeUsers(ctx context.Context) (manager.NodeUserPropertiesListResult, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -5973,17 +6277,22 @@ func (a *NsxComponentAdministrationApiService) ListNodeUsers(ctx context.Context
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService List resources for a given instruction, to be shown to/executed by users.
+/*
+	NsxComponentAdministrationApiService List resources for a given instruction, to be shown to/executed by users.
+
 For restore operations requiring user input e.g. performing an action, accepting/rejecting an action, etc. the information to be conveyed to users is provided in this call.
 * @param ctx context.Context Authentication Context
 @param instructionId Id of the instruction set whose instructions are to be returned
 @param optional (nil or map[string]interface{}) with one or more of:
-    @param "cursor" (string) Opaque cursor to be used for getting next page of records (supplied by current result page)
-    @param "includedFields" (string) Comma separated list of fields that should be included to result of query
-    @param "pageSize" (int64) Maximum number of results to return in this page (server may return fewer)
-    @param "sortAscending" (bool)
-    @param "sortBy" (string) Field by which records are sorted
-@return administration.ActionableResourceListResult*/
+
+	@param "cursor" (string) Opaque cursor to be used for getting next page of records (supplied by current result page)
+	@param "includedFields" (string) Comma separated list of fields that should be included to result of query
+	@param "pageSize" (int64) Maximum number of results to return in this page (server may return fewer)
+	@param "sortAscending" (bool)
+	@param "sortBy" (string) Field by which records are sorted
+
+@return administration.ActionableResourceListResult
+*/
 func (a *NsxComponentAdministrationApiService) ListRestoreInstructionResources(ctx context.Context, instructionId string, localVarOptionals map[string]interface{}) (administration.ActionableResourceListResult, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -6072,11 +6381,14 @@ func (a *NsxComponentAdministrationApiService) ListRestoreInstructionResources(c
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Add node syslog exporter
+/*
+	NsxComponentAdministrationApiService Add node syslog exporter
+
 Adds a rule for exporting syslog information to a specified server. The required parameters are the rule name (exporter_name); severity level (emerg, alert, crit, and so on); transmission protocol (TCP or UDP); and server IP address or hostname. The optional parameters are the syslog port number, which can be 1 through 65,535 (514, by default); facility level to use when logging messages to syslog (kern, user, mail, and so on); and message IDs (msgids), which identify the types of messages to export.
 * @param ctx context.Context Authentication Context
 @param nodeSyslogExporterProperties
-@return administration.NodeSyslogExporterProperties*/
+@return administration.NodeSyslogExporterProperties
+*/
 func (a *NsxComponentAdministrationApiService) PostNodeSyslogExporter(ctx context.Context, nodeSyslogExporterProperties administration.NodeSyslogExporterProperties) (administration.NodeSyslogExporterProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -6135,10 +6447,13 @@ func (a *NsxComponentAdministrationApiService) PostNodeSyslogExporter(ctx contex
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Query Restore Request Status
+/*
+	NsxComponentAdministrationApiService Query Restore Request Status
+
 Returns status information for the specified NSX cluster restore request.
 * @param ctx context.Context Authentication Context
-@return administration.ClusterRestoreStatus*/
+@return administration.ClusterRestoreStatus
+*/
 func (a *NsxComponentAdministrationApiService) QueryClusterRestoreStatus(ctx context.Context) (administration.ClusterRestoreStatus, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -6195,10 +6510,13 @@ func (a *NsxComponentAdministrationApiService) QueryClusterRestoreStatus(ctx con
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read appliance management service properties
+/*
+	NsxComponentAdministrationApiService Read appliance management service properties
+
 Read appliance management service properties
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceProperties*/
+@return administration.NodeServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadApplianceManagementService(ctx context.Context) (administration.NodeServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -6255,10 +6573,13 @@ func (a *NsxComponentAdministrationApiService) ReadApplianceManagementService(ct
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read appliance management service status
+/*
+	NsxComponentAdministrationApiService Read appliance management service status
+
 Read appliance management service status
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadApplianceManagementServiceStatus(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -6315,13 +6636,18 @@ func (a *NsxComponentAdministrationApiService) ReadApplianceManagementServiceSta
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read task properties
+/*
+	NsxComponentAdministrationApiService Read task properties
+
 Read task properties
 * @param ctx context.Context Authentication Context
 @param taskId ID of task to read
 @param optional (nil or map[string]interface{}) with one or more of:
-    @param "suppressRedirect" (bool) Suppress redirect status if applicable
-@return administration.ApplianceManagementTaskProperties*/
+
+	@param "suppressRedirect" (bool) Suppress redirect status if applicable
+
+@return administration.ApplianceManagementTaskProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadApplianceManagementTaskProperties(ctx context.Context, taskId string, localVarOptionals map[string]interface{}) (administration.ApplianceManagementTaskProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -6386,11 +6712,14 @@ func (a *NsxComponentAdministrationApiService) ReadApplianceManagementTaskProper
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read asynchronous task response
+/*
+	NsxComponentAdministrationApiService Read asynchronous task response
+
 Read asynchronous task response
 * @param ctx context.Context Authentication Context
 @param taskId ID of task to read
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) ReadAsnycApplianceManagementTaskResponse(ctx context.Context, taskId string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -6443,10 +6772,13 @@ func (a *NsxComponentAdministrationApiService) ReadAsnycApplianceManagementTaskR
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read AAA provider vIDM properties
+/*
+	NsxComponentAdministrationApiService Read AAA provider vIDM properties
+
 Read AAA provider vIDM properties
 * @param ctx context.Context Authentication Context
-@return administration.NodeAuthProviderVidmProperties*/
+@return administration.NodeAuthProviderVidmProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadAuthProviderVidm(ctx context.Context) (administration.NodeAuthProviderVidmProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -6503,10 +6835,13 @@ func (a *NsxComponentAdministrationApiService) ReadAuthProviderVidm(ctx context.
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read AAA provider vIDM status
+/*
+	NsxComponentAdministrationApiService Read AAA provider vIDM status
+
 Read AAA provider vIDM status
 * @param ctx context.Context Authentication Context
-@return administration.NodeAuthProviderVidmStatus*/
+@return administration.NodeAuthProviderVidmStatus
+*/
 func (a *NsxComponentAdministrationApiService) ReadAuthProviderVidmStatus(ctx context.Context) (administration.NodeAuthProviderVidmStatus, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -6563,10 +6898,13 @@ func (a *NsxComponentAdministrationApiService) ReadAuthProviderVidmStatus(ctx co
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read Cluster Configuration
+/*
+	NsxComponentAdministrationApiService Read Cluster Configuration
+
 Returns information about the NSX cluster configuration. An NSX cluster has two functions or purposes, commonly referred to as \&quot;roles.\&quot; These two roles are control and management. Each NSX installation has a single cluster. Separate NSX clusters do not share data. In other words, a given data-plane node is attached to only one cluster, not to multiple clusters.
 * @param ctx context.Context Authentication Context
-@return administration.ClusterConfig*/
+@return administration.ClusterConfig
+*/
 func (a *NsxComponentAdministrationApiService) ReadClusterConfig(ctx context.Context) (administration.ClusterConfig, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -6623,11 +6961,14 @@ func (a *NsxComponentAdministrationApiService) ReadClusterConfig(ctx context.Con
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read Cluster Node Configuration
+/*
+	NsxComponentAdministrationApiService Read Cluster Node Configuration
+
 Returns information about the specified NSX cluster node.
 * @param ctx context.Context Authentication Context
 @param nodeId
-@return administration.ClusterNodeConfig*/
+@return administration.ClusterNodeConfig
+*/
 func (a *NsxComponentAdministrationApiService) ReadClusterNodeConfig(ctx context.Context, nodeId string) (administration.ClusterNodeConfig, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -6685,14 +7026,19 @@ func (a *NsxComponentAdministrationApiService) ReadClusterNodeConfig(ctx context
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read the node&#39;s Network Interface
+/*
+	NsxComponentAdministrationApiService Read the node&#39;s Network Interface
+
 Returns detailed information about the specified interface. Interface information includes MTU, broadcast and host IP addresses, link and admin status, MAC address, network  mask, and the IP configuration method (static or DHCP).
 * @param ctx context.Context Authentication Context
 @param nodeId
 @param interfaceId
 @param optional (nil or map[string]interface{}) with one or more of:
-    @param "source" (string) Data source type.
-@return manager.NodeInterfaceProperties*/
+
+	@param "source" (string) Data source type.
+
+@return manager.NodeInterfaceProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadClusterNodeInterface(ctx context.Context, nodeId string, interfaceId string, localVarOptionals map[string]interface{}) (manager.NodeInterfaceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -6758,14 +7104,19 @@ func (a *NsxComponentAdministrationApiService) ReadClusterNodeInterface(ctx cont
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read the NSX Manager/Controller&#39;s Network Interface Statistics
+/*
+	NsxComponentAdministrationApiService Read the NSX Manager/Controller&#39;s Network Interface Statistics
+
 On the specified interface, returns the number of received (rx), transmitted (tx), and dropped packets; the number of bytes and errors received and transmitted on the interface; and the number of detected collisions.
 * @param ctx context.Context Authentication Context
 @param nodeId
 @param interfaceId
 @param optional (nil or map[string]interface{}) with one or more of:
-    @param "source" (string) Data source type.
-@return manager.NodeInterfaceStatisticsProperties*/
+
+	@param "source" (string) Data source type.
+
+@return manager.NodeInterfaceStatisticsProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadClusterNodeInterfaceStatistics(ctx context.Context, nodeId string, interfaceId string, localVarOptionals map[string]interface{}) (manager.NodeInterfaceStatisticsProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -6831,13 +7182,18 @@ func (a *NsxComponentAdministrationApiService) ReadClusterNodeInterfaceStatistic
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read Cluster Node Status
+/*
+	NsxComponentAdministrationApiService Read Cluster Node Status
+
 Read Cluster Node Status
 * @param ctx context.Context Authentication Context
 @param nodeId
 @param optional (nil or map[string]interface{}) with one or more of:
-    @param "source" (string) Data source type.
-@return administration.ClusterNodeStatus*/
+
+	@param "source" (string) Data source type.
+
+@return administration.ClusterNodeStatus
+*/
 func (a *NsxComponentAdministrationApiService) ReadClusterNodeStatus(ctx context.Context, nodeId string, localVarOptionals map[string]interface{}) (administration.ClusterNodeStatus, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -6902,10 +7258,13 @@ func (a *NsxComponentAdministrationApiService) ReadClusterNodeStatus(ctx context
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read Cluster Status
+/*
+	NsxComponentAdministrationApiService Read Cluster Status
+
 Read Cluster Status
 * @param ctx context.Context Authentication Context
-@return administration.ClustersAggregateInfo*/
+@return administration.ClustersAggregateInfo
+*/
 func (a *NsxComponentAdministrationApiService) ReadClusterNodesAggregateStatus(ctx context.Context) (administration.ClustersAggregateInfo, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -6962,12 +7321,17 @@ func (a *NsxComponentAdministrationApiService) ReadClusterNodesAggregateStatus(c
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read Cluster Status
+/*
+	NsxComponentAdministrationApiService Read Cluster Status
+
 Returns status information for the NSX cluster control role and management role.
 * @param ctx context.Context Authentication Context
 @param optional (nil or map[string]interface{}) with one or more of:
-    @param "source" (string) Data source type.
-@return administration.ClusterStatus*/
+
+	@param "source" (string) Data source type.
+
+@return administration.ClusterStatus
+*/
 func (a *NsxComponentAdministrationApiService) ReadClusterStatus(ctx context.Context, localVarOptionals map[string]interface{}) (administration.ClusterStatus, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -7031,10 +7395,13 @@ func (a *NsxComponentAdministrationApiService) ReadClusterStatus(ctx context.Con
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read cm inventory service properties
+/*
+	NsxComponentAdministrationApiService Read cm inventory service properties
+
 Read cm inventory service properties
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceProperties*/
+@return administration.NodeServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadCminventoryService(ctx context.Context) (administration.NodeServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -7091,10 +7458,13 @@ func (a *NsxComponentAdministrationApiService) ReadCminventoryService(ctx contex
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read manager service status
+/*
+	NsxComponentAdministrationApiService Read manager service status
+
 Read manager service status
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadCminventoryServiceStatus(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -7151,11 +7521,14 @@ func (a *NsxComponentAdministrationApiService) ReadCminventoryServiceStatus(ctx 
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read file contents
+/*
+	NsxComponentAdministrationApiService Read file contents
+
 Read file contents
 * @param ctx context.Context Authentication Context
 @param fileName Name of the file to read
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) ReadFile(ctx context.Context, fileName string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -7208,11 +7581,14 @@ func (a *NsxComponentAdministrationApiService) ReadFile(ctx context.Context, fil
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read file properties
+/*
+	NsxComponentAdministrationApiService Read file properties
+
 Read file properties
 * @param ctx context.Context Authentication Context
 @param fileName Name of the file to retrieve information about
-@return administration.FileProperties*/
+@return administration.FileProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadFileProperties(ctx context.Context, fileName string) (administration.FileProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -7270,11 +7646,14 @@ func (a *NsxComponentAdministrationApiService) ReadFileProperties(ctx context.Co
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read file thumbprint
+/*
+	NsxComponentAdministrationApiService Read file thumbprint
+
 Read file thumbprint
 * @param ctx context.Context Authentication Context
 @param fileName Name of the file for which thumbprint should be computed
-@return administration.FileThumbprint*/
+@return administration.FileThumbprint
+*/
 func (a *NsxComponentAdministrationApiService) ReadFileThumbprint(ctx context.Context, fileName string) (administration.FileThumbprint, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -7332,10 +7711,13 @@ func (a *NsxComponentAdministrationApiService) ReadFileThumbprint(ctx context.Co
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read liagent service properties
+/*
+	NsxComponentAdministrationApiService Read liagent service properties
+
 Read liagent service properties
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceProperties*/
+@return administration.NodeServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadLiagentService(ctx context.Context) (administration.NodeServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -7392,10 +7774,13 @@ func (a *NsxComponentAdministrationApiService) ReadLiagentService(ctx context.Co
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read liagent service status
+/*
+	NsxComponentAdministrationApiService Read liagent service status
+
 Read liagent service status
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadLiagentServiceStatus(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -7452,10 +7837,13 @@ func (a *NsxComponentAdministrationApiService) ReadLiagentServiceStatus(ctx cont
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read NSX Management nodes global configuration.
+/*
+	NsxComponentAdministrationApiService Read NSX Management nodes global configuration.
+
 Returns the NSX Management nodes global configuration.
 * @param ctx context.Context Authentication Context
-@return manager.ManagementConfig*/
+@return manager.ManagementConfig
+*/
 func (a *NsxComponentAdministrationApiService) ReadManagementConfig(ctx context.Context) (manager.ManagementConfig, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -7512,10 +7900,13 @@ func (a *NsxComponentAdministrationApiService) ReadManagementConfig(ctx context.
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read NSX Message Bus service properties
+/*
+	NsxComponentAdministrationApiService Read NSX Message Bus service properties
+
 Read NSX Message Bus service properties
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceProperties*/
+@return administration.NodeServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadNSXMessageBusService(ctx context.Context) (administration.NodeServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -7572,10 +7963,13 @@ func (a *NsxComponentAdministrationApiService) ReadNSXMessageBusService(ctx cont
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read NSX Message Bus service status
+/*
+	NsxComponentAdministrationApiService Read NSX Message Bus service status
+
 Read NSX Message Bus service status
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadNSXMessageBusServiceStatus(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -7632,10 +8026,13 @@ func (a *NsxComponentAdministrationApiService) ReadNSXMessageBusServiceStatus(ct
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read NTP service properties
+/*
+	NsxComponentAdministrationApiService Read NTP service properties
+
 Read NTP service properties
 * @param ctx context.Context Authentication Context
-@return NodeNtpServiceProperties*/
+@return NodeNtpServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadNTPService(ctx context.Context) (administration.NodeNtpServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -7692,10 +8089,13 @@ func (a *NsxComponentAdministrationApiService) ReadNTPService(ctx context.Contex
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read NTP service status
+/*
+	NsxComponentAdministrationApiService Read NTP service status
+
 Read NTP service status
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadNTPServiceStatus(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -7752,11 +8152,14 @@ func (a *NsxComponentAdministrationApiService) ReadNTPServiceStatus(ctx context.
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read the NSX Manager&#39;s Network Interface Statistics
+/*
+	NsxComponentAdministrationApiService Read the NSX Manager&#39;s Network Interface Statistics
+
 On the specified interface, returns the number of received (rx), transmitted (tx), and dropped packets; the number of bytes and errors received and transmitted on the interface; and the number of detected collisions.
 * @param ctx context.Context Authentication Context
 @param interfaceId ID of interface to read
-@return manager.NodeInterfaceStatisticsProperties*/
+@return manager.NodeInterfaceStatisticsProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadNetworkInterfaceStatistics(ctx context.Context, interfaceId string) (manager.NodeInterfaceStatisticsProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -7814,10 +8217,13 @@ func (a *NsxComponentAdministrationApiService) ReadNetworkInterfaceStatistics(ct
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read network configuration properties
+/*
+	NsxComponentAdministrationApiService Read network configuration properties
+
 Read network configuration properties
 * @param ctx context.Context Authentication Context
-@return administration.NodeNetworkProperties*/
+@return administration.NodeNetworkProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadNetworkProperties(ctx context.Context) (administration.NodeNetworkProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -7874,11 +8280,14 @@ func (a *NsxComponentAdministrationApiService) ReadNetworkProperties(ctx context
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read the NSX Manager&#39;s Network Interface
+/*
+	NsxComponentAdministrationApiService Read the NSX Manager&#39;s Network Interface
+
 Returns detailed information about the specified interface. Interface information includes MTU, broadcast and host IP addresses, link and admin status, MAC address, network  mask, and the IP configuration method.
 * @param ctx context.Context Authentication Context
 @param interfaceId ID of interface to read
-@return manager.NodeNetworkInterfaceProperties*/
+@return manager.NodeNetworkInterfaceProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadNodeInterface(ctx context.Context, interfaceId string) (manager.NodeNetworkInterfaceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -7936,10 +8345,13 @@ func (a *NsxComponentAdministrationApiService) ReadNodeInterface(ctx context.Con
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read the NSX Manager&#39;s Name Servers
+/*
+	NsxComponentAdministrationApiService Read the NSX Manager&#39;s Name Servers
+
 Returns the list of servers that the NSX Manager node uses to look up IP addresses associated with given domain names.
 * @param ctx context.Context Authentication Context
-@return administration.NodeNameServersProperties*/
+@return administration.NodeNameServersProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadNodeNameServers(ctx context.Context) (administration.NodeNameServersProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -7996,11 +8408,14 @@ func (a *NsxComponentAdministrationApiService) ReadNodeNameServers(ctx context.C
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read node network route
+/*
+	NsxComponentAdministrationApiService Read node network route
+
 Returns detailed information about a specified route in the NSX Manager routing table.
 * @param ctx context.Context Authentication Context
 @param routeId ID of route to read
-@return administration.NodeRouteProperties*/
+@return administration.NodeRouteProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadNodeNetworkRoute(ctx context.Context, routeId string) (administration.NodeRouteProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -8058,11 +8473,14 @@ func (a *NsxComponentAdministrationApiService) ReadNodeNetworkRoute(ctx context.
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read node process
+/*
+	NsxComponentAdministrationApiService Read node process
+
 Returns information for a specified process ID (pid).
 * @param ctx context.Context Authentication Context
 @param processId ID of process to read
-@return administration.NodeProcessProperties*/
+@return administration.NodeProcessProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadNodeProcess(ctx context.Context, processId string) (administration.NodeProcessProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -8120,10 +8538,13 @@ func (a *NsxComponentAdministrationApiService) ReadNodeProcess(ctx context.Conte
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read node properties
+/*
+	NsxComponentAdministrationApiService Read node properties
+
 Returns information about the NSX Manager appliance. Information includes release number, time zone, system time, kernel version, message of the day (motd), and host name.
 * @param ctx context.Context Authentication Context
-@return manager.NodeProperties*/
+@return manager.NodeProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadNodeProperties(ctx context.Context) (manager.NodeProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -8180,10 +8601,13 @@ func (a *NsxComponentAdministrationApiService) ReadNodeProperties(ctx context.Co
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read the NSX Manager&#39;s Search Domains
+/*
+	NsxComponentAdministrationApiService Read the NSX Manager&#39;s Search Domains
+
 Returns the domain list that the NSX Manager node uses to complete unqualified host names. When a host name does not include a fully qualified domain name (FQDN), the NSX Management node appends the first-listed domain name to the host name before the host name is looked up. The NSX Management node continues this for each entry in the domain list until it finds a match.
 * @param ctx context.Context Authentication Context
-@return administration.NodeSearchDomainsProperties*/
+@return administration.NodeSearchDomainsProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadNodeSearchDomains(ctx context.Context) (administration.NodeSearchDomainsProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -8240,12 +8664,17 @@ func (a *NsxComponentAdministrationApiService) ReadNodeSearchDomains(ctx context
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read node support bundle
+/*
+	NsxComponentAdministrationApiService Read node support bundle
+
 Read node support bundle
 * @param ctx context.Context Authentication Context
 @param optional (nil or map[string]interface{}) with one or more of:
-    @param "all" (bool) Include all files
-@return */
+
+	@param "all" (bool) Include all files
+
+@return
+*/
 func (a *NsxComponentAdministrationApiService) ReadNodeSupportBundle(ctx context.Context, localVarOptionals map[string]interface{}) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -8304,11 +8733,14 @@ func (a *NsxComponentAdministrationApiService) ReadNodeSupportBundle(ctx context
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read node syslog exporter
+/*
+	NsxComponentAdministrationApiService Read node syslog exporter
+
 Returns information about a specific syslog collection point.
 * @param ctx context.Context Authentication Context
 @param exporterName Name of syslog exporter
-@return administration.NodeSyslogExporterProperties*/
+@return administration.NodeSyslogExporterProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadNodeSyslogExporter(ctx context.Context, exporterName string) (administration.NodeSyslogExporterProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -8366,11 +8798,14 @@ func (a *NsxComponentAdministrationApiService) ReadNodeSyslogExporter(ctx contex
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read node user
+/*
+	NsxComponentAdministrationApiService Read node user
+
 Returns information about a specified user who is configued to log in to the NSX Manager appliance
 * @param ctx context.Context Authentication Context
 @param userid User id of the user
-@return manager.NodeUserProperties*/
+@return manager.NodeUserProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadNodeUser(ctx context.Context, userid string) (manager.NodeUserProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -8428,10 +8863,13 @@ func (a *NsxComponentAdministrationApiService) ReadNodeUser(ctx context.Context,
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read NSX upgrade Agent service properties
+/*
+	NsxComponentAdministrationApiService Read NSX upgrade Agent service properties
+
 Read NSX upgrade Agent service properties
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceProperties*/
+@return administration.NodeServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadNsxUpgradeAgentService(ctx context.Context) (administration.NodeServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -8488,10 +8926,13 @@ func (a *NsxComponentAdministrationApiService) ReadNsxUpgradeAgentService(ctx co
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read Nsx upgrade agent service status
+/*
+	NsxComponentAdministrationApiService Read Nsx upgrade agent service status
+
 Read Nsx upgrade agent service status
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadNsxUpgradeAgentServiceStatus(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -8548,10 +8989,13 @@ func (a *NsxComponentAdministrationApiService) ReadNsxUpgradeAgentServiceStatus(
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read manager service properties
+/*
+	NsxComponentAdministrationApiService Read manager service properties
+
 Read manager service properties
 * @param ctx context.Context Authentication Context
-@return administration.NodeProtonServiceProperties*/
+@return administration.NodeProtonServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadProtonService(ctx context.Context) (administration.NodeProtonServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -8608,10 +9052,13 @@ func (a *NsxComponentAdministrationApiService) ReadProtonService(ctx context.Con
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read manager service status
+/*
+	NsxComponentAdministrationApiService Read manager service status
+
 Read manager service status
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadProtonServiceStatus(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -8668,10 +9115,13 @@ func (a *NsxComponentAdministrationApiService) ReadProtonServiceStatus(ctx conte
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read http service properties
+/*
+	NsxComponentAdministrationApiService Read http service properties
+
 Read http service properties
 * @param ctx context.Context Authentication Context
-@return administration.NodeHttpServiceProperties*/
+@return administration.NodeHttpServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadProxyService(ctx context.Context) (administration.NodeHttpServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -8728,10 +9178,13 @@ func (a *NsxComponentAdministrationApiService) ReadProxyService(ctx context.Cont
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read http service status
+/*
+	NsxComponentAdministrationApiService Read http service status
+
 Read http service status
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadProxyServiceStatus(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -8788,10 +9241,13 @@ func (a *NsxComponentAdministrationApiService) ReadProxyServiceStatus(ctx contex
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read Rabbit MQ service properties
+/*
+	NsxComponentAdministrationApiService Read Rabbit MQ service properties
+
 Read Rabbit MQ service properties
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceProperties*/
+@return administration.NodeServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadRabbitMQService(ctx context.Context) (administration.NodeServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -8848,10 +9304,13 @@ func (a *NsxComponentAdministrationApiService) ReadRabbitMQService(ctx context.C
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read Rabbit MQ service status
+/*
+	NsxComponentAdministrationApiService Read Rabbit MQ service status
+
 Read Rabbit MQ service status
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadRabbitMQServiceStatus(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -8908,10 +9367,13 @@ func (a *NsxComponentAdministrationApiService) ReadRabbitMQServiceStatus(ctx con
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read NSX install-upgrade service properties
+/*
+	NsxComponentAdministrationApiService Read NSX install-upgrade service properties
+
 Read NSX install-upgrade service properties
 * @param ctx context.Context Authentication Context
-@return administration.NodeInstallUpgradeServiceProperties*/
+@return administration.NodeInstallUpgradeServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadRepositoryService(ctx context.Context) (administration.NodeInstallUpgradeServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -8968,10 +9430,13 @@ func (a *NsxComponentAdministrationApiService) ReadRepositoryService(ctx context
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read NSX install-upgrade service status
+/*
+	NsxComponentAdministrationApiService Read NSX install-upgrade service status
+
 Read NSX install-upgrade service status
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadRepositoryServiceStatus(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -9028,10 +9493,13 @@ func (a *NsxComponentAdministrationApiService) ReadRepositoryServiceStatus(ctx c
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read SNMP service properties
+/*
+	NsxComponentAdministrationApiService Read SNMP service properties
+
 Read SNMP service properties
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceProperties*/
+@return administration.NodeServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadSNMPService(ctx context.Context) (administration.NodeServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -9088,10 +9556,13 @@ func (a *NsxComponentAdministrationApiService) ReadSNMPService(ctx context.Conte
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read SNMP service status
+/*
+	NsxComponentAdministrationApiService Read SNMP service status
+
 Read SNMP service status
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadSNMPServiceStatus(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -9148,10 +9619,13 @@ func (a *NsxComponentAdministrationApiService) ReadSNMPServiceStatus(ctx context
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read ssh service properties
+/*
+	NsxComponentAdministrationApiService Read ssh service properties
+
 Read ssh service properties
 * @param ctx context.Context Authentication Context
-@return administration.NodeSshServiceProperties*/
+@return administration.NodeSshServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadSSHService(ctx context.Context) (administration.NodeSshServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -9208,10 +9682,13 @@ func (a *NsxComponentAdministrationApiService) ReadSSHService(ctx context.Contex
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read ssh service status
+/*
+	NsxComponentAdministrationApiService Read ssh service status
+
 Read ssh service status
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadSSHServiceStatus(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -9268,10 +9745,13 @@ func (a *NsxComponentAdministrationApiService) ReadSSHServiceStatus(ctx context.
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read NSX Search service properties
+/*
+	NsxComponentAdministrationApiService Read NSX Search service properties
+
 Read NSX Search service properties
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceProperties*/
+@return administration.NodeServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadSearchService(ctx context.Context) (administration.NodeServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -9328,10 +9808,13 @@ func (a *NsxComponentAdministrationApiService) ReadSearchService(ctx context.Con
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read NSX Search service status
+/*
+	NsxComponentAdministrationApiService Read NSX Search service status
+
 Read NSX Search service status
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadSearchServiceStatus(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -9388,10 +9871,13 @@ func (a *NsxComponentAdministrationApiService) ReadSearchServiceStatus(ctx conte
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read syslog service properties
+/*
+	NsxComponentAdministrationApiService Read syslog service properties
+
 Read syslog service properties
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceProperties*/
+@return administration.NodeServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadSyslogService(ctx context.Context) (administration.NodeServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -9448,10 +9934,13 @@ func (a *NsxComponentAdministrationApiService) ReadSyslogService(ctx context.Con
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Read syslog service status
+/*
+	NsxComponentAdministrationApiService Read syslog service status
+
 Read syslog service status
 * @param ctx context.Context Authentication Context
-@return administration.NodeServiceStatusProperties*/
+@return administration.NodeServiceStatusProperties
+*/
 func (a *NsxComponentAdministrationApiService) ReadSyslogServiceStatus(ctx context.Context) (administration.NodeServiceStatusProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
@@ -9508,11 +9997,14 @@ func (a *NsxComponentAdministrationApiService) ReadSyslogServiceStatus(ctx conte
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Register a name-certificate combination.
+/*
+	NsxComponentAdministrationApiService Register a name-certificate combination.
+
 Associates a principal&#39;s name with a certificate that is used to authenticate.
 * @param ctx context.Context Authentication Context
 @param principalIdentity
-@return trust.PrincipalIdentity*/
+@return trust.PrincipalIdentity
+*/
 func (a *NsxComponentAdministrationApiService) RegisterPrincipalIdentity(ctx context.Context, principalIdentity trust.PrincipalIdentity) (trust.PrincipalIdentity, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -9571,10 +10063,13 @@ func (a *NsxComponentAdministrationApiService) RegisterPrincipalIdentity(ctx con
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Request one-time backup
+/*
+	NsxComponentAdministrationApiService Request one-time backup
+
 Request one-time backup. The backup will be uploaded using the same server configuration as for automatic backup.
 * @param ctx context.Context Authentication Context
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) RequestOnetimeBackupBackupToRemote(ctx context.Context) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -9626,10 +10121,13 @@ func (a *NsxComponentAdministrationApiService) RequestOnetimeBackupBackupToRemot
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Request one-time inventory summary.
+/*
+	NsxComponentAdministrationApiService Request one-time inventory summary.
+
 Request one-time inventory summary. The backup will be uploaded using the same server configuration as for an automatic backup.
 * @param ctx context.Context Authentication Context
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) RequestOnetimeInventorySummarySummarizeInventoryToRemote(ctx context.Context) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -9681,10 +10179,13 @@ func (a *NsxComponentAdministrationApiService) RequestOnetimeInventorySummarySum
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Reset the manager logging levels to default values
+/*
+	NsxComponentAdministrationApiService Reset the manager logging levels to default values
+
 Reset the manager logging levels to default values
 * @param ctx context.Context Authentication Context
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) ResetProtonServiceLoggingLevelActionResetManagerLoggingLevels(ctx context.Context) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -9736,10 +10237,13 @@ func (a *NsxComponentAdministrationApiService) ResetProtonServiceLoggingLevelAct
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart or shutdown node
+/*
+	NsxComponentAdministrationApiService Restart or shutdown node
+
 Restarts or shuts down the NSX Manager appliance.
 * @param ctx context.Context Authentication Context
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) RestartOrShutdownNodeRestart(ctx context.Context) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -9791,10 +10295,13 @@ func (a *NsxComponentAdministrationApiService) RestartOrShutdownNodeRestart(ctx 
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Restart or shutdown node
+/*
+	NsxComponentAdministrationApiService Restart or shutdown node
+
 Restarts or shuts down the NSX Manager appliance.
 * @param ctx context.Context Authentication Context
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) RestartOrShutdownNodeShutdown(ctx context.Context) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -9846,10 +10353,13 @@ func (a *NsxComponentAdministrationApiService) RestartOrShutdownNodeShutdown(ctx
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Retry any failed restore operation
+/*
+	NsxComponentAdministrationApiService Retry any failed restore operation
+
 Retry any currently in-progress, failed restore operation. Only the last step of the multi-step restore operation would have failed,and only that step is retried. This operation is only valid when a GET cluster/restore/status returns a status with value FAILED. Otherwise, a 409 response is returned.
 * @param ctx context.Context Authentication Context
-@return administration.ClusterRestoreStatus*/
+@return administration.ClusterRestoreStatus
+*/
 func (a *NsxComponentAdministrationApiService) RetryClusterRestoreRetry(ctx context.Context) (administration.ClusterRestoreStatus, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -9906,11 +10416,14 @@ func (a *NsxComponentAdministrationApiService) RetryClusterRestoreRetry(ctx cont
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Revoke Missing Nodes from the Cluster
+/*
+	NsxComponentAdministrationApiService Revoke Missing Nodes from the Cluster
+
 Revoke Missing Nodes from the Cluster
 * @param ctx context.Context Authentication Context
 @param revokeNodeRequest
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) RevokeMissingClusterNodeConfigRevokeMissingNodes(ctx context.Context, revokeNodeRequest administration.RevokeNodeRequest) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -9964,12 +10477,15 @@ func (a *NsxComponentAdministrationApiService) RevokeMissingClusterNodeConfigRev
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Self-Sign the CSR
+/*
+	NsxComponentAdministrationApiService Self-Sign the CSR
+
 Self-signs the previously generated CSR. This action is similar to the import certificate action, but instead of using a public certificate signed by a CA, the self_sign POST action uses a certificate that is signed with NSX&#39;s own private key.
 * @param ctx context.Context Authentication Context
 @param csrId CSR this certificate is associated with
 @param daysValid Number of days the certificate will be valid, default 10 years
-@return trust.Certificate*/
+@return trust.Certificate
+*/
 func (a *NsxComponentAdministrationApiService) SelfSignCertificateSelfSign(ctx context.Context, csrId string, daysValid int64) (trust.Certificate, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -10035,11 +10551,14 @@ func (a *NsxComponentAdministrationApiService) SelfSignCertificateSelfSign(ctx c
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Enable or disable  Mandatory Access Control
+/*
+	NsxComponentAdministrationApiService Enable or disable  Mandatory Access Control
+
 Enable or disable  Mandatory Access Control
 * @param ctx context.Context Authentication Context
 @param mandatoryAccessControlProperties
-@return administration.MandatoryAccessControlProperties*/
+@return administration.MandatoryAccessControlProperties
+*/
 func (a *NsxComponentAdministrationApiService) SetNodeMandatoryAccessControl(ctx context.Context, mandatoryAccessControlProperties administration.MandatoryAccessControlProperties) (administration.MandatoryAccessControlProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
@@ -10098,10 +10617,13 @@ func (a *NsxComponentAdministrationApiService) SetNodeMandatoryAccessControl(ctx
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Set RabbitMQ management port
+/*
+	NsxComponentAdministrationApiService Set RabbitMQ management port
+
 Set RabbitMQ management port
 * @param ctx context.Context Authentication Context
-@return */
+@return
+*/
 func (a *NsxComponentAdministrationApiService) SetRabbitMQManagementPort(ctx context.Context) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -10153,10 +10675,13 @@ func (a *NsxComponentAdministrationApiService) SetRabbitMQManagementPort(ctx con
 	return localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Suspend any running restore operation
+/*
+	NsxComponentAdministrationApiService Suspend any running restore operation
+
 Suspend any currently running restore operation. The restore operation is made up of a number of steps. When this call is issued, any currently running step is allowed to finish (successfully or with errors), and the next step (and therefore the entire restore operation) is suspended until a subsequent resume or cancel call is issued. This operation is only valid when a GET cluster/restore/status returns a status with value RUNNING. Otherwise, a 409 response is returned.
 * @param ctx context.Context Authentication Context
-@return administration.ClusterRestoreStatus*/
+@return administration.ClusterRestoreStatus
+*/
 func (a *NsxComponentAdministrationApiService) SuspendClusterRestoreSuspend(ctx context.Context) (administration.ClusterRestoreStatus, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
@@ -10213,11 +10738,14 @@ func (a *NsxComponentAdministrationApiService) SuspendClusterRestoreSuspend(ctx 
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Update AAA provider vIDM properties
+/*
+	NsxComponentAdministrationApiService Update AAA provider vIDM properties
+
 Update AAA provider vIDM properties
 * @param ctx context.Context Authentication Context
 @param nodeAuthProviderVidmProperties
-@return administration.NodeAuthProviderVidmProperties*/
+@return administration.NodeAuthProviderVidmProperties
+*/
 func (a *NsxComponentAdministrationApiService) UpdateAuthProviderVidm(ctx context.Context, nodeAuthProviderVidmProperties administration.NodeAuthProviderVidmProperties) (administration.NodeAuthProviderVidmProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
@@ -10276,12 +10804,15 @@ func (a *NsxComponentAdministrationApiService) UpdateAuthProviderVidm(ctx contex
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Update CRL for the Given CRL ID
+/*
+	NsxComponentAdministrationApiService Update CRL for the Given CRL ID
+
 Updates an existing CRL.
 * @param ctx context.Context Authentication Context
 @param crlId ID of CRL to update
 @param crl
-@return trust.Crl*/
+@return trust.Crl
+*/
 func (a *NsxComponentAdministrationApiService) UpdateCrl(ctx context.Context, crlId string, crl trust.Crl) (trust.Crl, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
@@ -10341,11 +10872,14 @@ func (a *NsxComponentAdministrationApiService) UpdateCrl(ctx context.Context, cr
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Replace file contents
+/*
+	NsxComponentAdministrationApiService Replace file contents
+
 Replace file contents
 * @param ctx context.Context Authentication Context
 @param fileName Name of the file to replace
-@return administration.FileProperties*/
+@return administration.FileProperties
+*/
 func (a *NsxComponentAdministrationApiService) UpdateFile(ctx context.Context, fileName string) (administration.FileProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
@@ -10403,11 +10937,14 @@ func (a *NsxComponentAdministrationApiService) UpdateFile(ctx context.Context, f
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Update NSX Management nodes global configuration
+/*
+	NsxComponentAdministrationApiService Update NSX Management nodes global configuration
+
 Modifies the NSX Management nodes global configuration.
 * @param ctx context.Context Authentication Context
 @param managementConfig
-@return manager.ManagementConfig*/
+@return manager.ManagementConfig
+*/
 func (a *NsxComponentAdministrationApiService) UpdateManagementConfig(ctx context.Context, managementConfig manager.ManagementConfig) (manager.ManagementConfig, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
@@ -10466,11 +11003,14 @@ func (a *NsxComponentAdministrationApiService) UpdateManagementConfig(ctx contex
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Update NTP service properties
+/*
+	NsxComponentAdministrationApiService Update NTP service properties
+
 Update NTP service properties
 * @param ctx context.Context Authentication Context
 @param nodeNtpServiceProperties
-@return administration.NodeNtpServiceProperties*/
+@return administration.NodeNtpServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) UpdateNTPService(ctx context.Context, nodeNtpServiceProperties administration.NodeNtpServiceProperties) (administration.NodeNtpServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
@@ -10529,12 +11069,15 @@ func (a *NsxComponentAdministrationApiService) UpdateNTPService(ctx context.Cont
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Update the NSX Manager&#39;s Network Interface
+/*
+	NsxComponentAdministrationApiService Update the NSX Manager&#39;s Network Interface
+
 Updates the specified interface properties. You cannot change the properties &lt;code&gt;ip_configuration&lt;/code&gt;, &lt;code&gt;ip_addresses&lt;/code&gt;, or &lt;code&gt;plane&lt;/code&gt;. NSX Manager must have a static IP address. You must use NSX CLI to configure a controller or an edge node.
 * @param ctx context.Context Authentication Context
 @param interfaceId ID of interface to update
 @param nodeNetworkInterfaceProperties
-@return manager.NodeNetworkInterfaceProperties*/
+@return manager.NodeNetworkInterfaceProperties
+*/
 func (a *NsxComponentAdministrationApiService) UpdateNodeInterface(ctx context.Context, interfaceId string, nodeNetworkInterfaceProperties manager.NodeNetworkInterfaceProperties) (manager.NodeNetworkInterfaceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
@@ -10594,11 +11137,14 @@ func (a *NsxComponentAdministrationApiService) UpdateNodeInterface(ctx context.C
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Update the NSX Manager&#39;s Name Servers
+/*
+	NsxComponentAdministrationApiService Update the NSX Manager&#39;s Name Servers
+
 Modifies the list of servers that the NSX Manager node uses to look up IP addresses associated with given domain names. If DHCP is configured, this method returns a 409 CONFLICT error, because DHCP manages the list of name servers.
 * @param ctx context.Context Authentication Context
 @param nodeNameServersProperties
-@return administration.NodeNameServersProperties*/
+@return administration.NodeNameServersProperties
+*/
 func (a *NsxComponentAdministrationApiService) UpdateNodeNameServers(ctx context.Context, nodeNameServersProperties administration.NodeNameServersProperties) (administration.NodeNameServersProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
@@ -10657,11 +11203,14 @@ func (a *NsxComponentAdministrationApiService) UpdateNodeNameServers(ctx context
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Update node properties
+/*
+	NsxComponentAdministrationApiService Update node properties
+
 Modifies NSX Manager appliance properties. Modifiable properties include the timezone, message of the day (motd), and hostname. The NSX Manager node_version, system_time, and kernel_version are read only and cannot be modified with this method.
 * @param ctx context.Context Authentication Context
 @param nodeProperties
-@return manager.NodeProperties*/
+@return manager.NodeProperties
+*/
 func (a *NsxComponentAdministrationApiService) UpdateNodeProperties(ctx context.Context, nodeProperties manager.NodeProperties) (manager.NodeProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
@@ -10720,11 +11269,14 @@ func (a *NsxComponentAdministrationApiService) UpdateNodeProperties(ctx context.
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Update the NSX Manager&#39;s Search Domains
+/*
+	NsxComponentAdministrationApiService Update the NSX Manager&#39;s Search Domains
+
 Modifies the list of domain names that the NSX Manager node uses to complete unqualified host names. If DHCP is configured, this method returns a 409 CONFLICT error, because DHCP manages the list of name servers.
 * @param ctx context.Context Authentication Context
 @param nodeSearchDomainsProperties
-@return administration.NodeSearchDomainsProperties*/
+@return administration.NodeSearchDomainsProperties
+*/
 func (a *NsxComponentAdministrationApiService) UpdateNodeSearchDomains(ctx context.Context, nodeSearchDomainsProperties administration.NodeSearchDomainsProperties) (administration.NodeSearchDomainsProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
@@ -10783,12 +11335,15 @@ func (a *NsxComponentAdministrationApiService) UpdateNodeSearchDomains(ctx conte
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Update node user
+/*
+	NsxComponentAdministrationApiService Update node user
+
 Updates attributes of an existing NSX Manager appliance user. This method cannot be used to add a new user. Modifiable attributes include the username, full name of the user, and password. If you specify a password in a PUT request, it is not returned in the response. Nor is it returned in a GET request.
 * @param ctx context.Context Authentication Context
 @param userid User id of the user
 @param nodeUserProperties
-@return manager.NodeUserProperties*/
+@return manager.NodeUserProperties
+*/
 func (a *NsxComponentAdministrationApiService) UpdateNodeUser(ctx context.Context, userid string, nodeUserProperties manager.NodeUserProperties) (manager.NodeUserProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
@@ -10848,11 +11403,14 @@ func (a *NsxComponentAdministrationApiService) UpdateNodeUser(ctx context.Contex
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Update Proton service properties
+/*
+	NsxComponentAdministrationApiService Update Proton service properties
+
 Update Proton service properties
 * @param ctx context.Context Authentication Context
 @param nodeProtonServiceProperties
-@return administration.NodeProtonServiceProperties*/
+@return administration.NodeProtonServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) UpdateProtonService(ctx context.Context, nodeProtonServiceProperties administration.NodeProtonServiceProperties) (administration.NodeProtonServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
@@ -10911,11 +11469,14 @@ func (a *NsxComponentAdministrationApiService) UpdateProtonService(ctx context.C
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Update http service properties
+/*
+	NsxComponentAdministrationApiService Update http service properties
+
 Update http service properties
 * @param ctx context.Context Authentication Context
 @param nodeHttpServiceProperties
-@return administration.NodeHttpServiceProperties*/
+@return administration.NodeHttpServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) UpdateProxyService(ctx context.Context, nodeHttpServiceProperties administration.NodeHttpServiceProperties) (administration.NodeHttpServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
@@ -10974,11 +11535,14 @@ func (a *NsxComponentAdministrationApiService) UpdateProxyService(ctx context.Co
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Update NSX install-upgrade service properties
+/*
+	NsxComponentAdministrationApiService Update NSX install-upgrade service properties
+
 Update NSX install-upgrade service properties
 * @param ctx context.Context Authentication Context
 @param nodeInstallUpgradeServiceProperties
-@return administration.NodeInstallUpgradeServiceProperties*/
+@return administration.NodeInstallUpgradeServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) UpdateRepositoryService(ctx context.Context, nodeInstallUpgradeServiceProperties administration.NodeInstallUpgradeServiceProperties) (administration.NodeInstallUpgradeServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
@@ -11037,11 +11601,14 @@ func (a *NsxComponentAdministrationApiService) UpdateRepositoryService(ctx conte
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Update SNMP service properties
+/*
+	NsxComponentAdministrationApiService Update SNMP service properties
+
 Update SNMP service properties
 * @param ctx context.Context Authentication Context
 @param nodeSnmpServiceProperties
-@return administration.NodeSnmpServiceProperties*/
+@return administration.NodeSnmpServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) UpdateSNMPService(ctx context.Context, nodeSnmpServiceProperties administration.NodeSnmpServiceProperties) (administration.NodeSnmpServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
@@ -11100,11 +11667,14 @@ func (a *NsxComponentAdministrationApiService) UpdateSNMPService(ctx context.Con
 	return successPayload, localVarHttpResponse, err
 }
 
-/* NsxComponentAdministrationApiService Update ssh service properties
+/*
+	NsxComponentAdministrationApiService Update ssh service properties
+
 Update ssh service properties
 * @param ctx context.Context Authentication Context
 @param nodeSshServiceProperties
-@return administration.NodeSshServiceProperties*/
+@return administration.NodeSshServiceProperties
+*/
 func (a *NsxComponentAdministrationApiService) UpdateSSHService(ctx context.Context, nodeSshServiceProperties administration.NodeSshServiceProperties) (administration.NodeSshServiceProperties, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
@@ -11161,4 +11731,92 @@ func (a *NsxComponentAdministrationApiService) UpdateSSHService(ctx context.Cont
 	}
 
 	return successPayload, localVarHttpResponse, err
+}
+
+/*
+NsxComponentAdministrationApiService Register a name-certificate combination.
+Create a principal identity with a new, unused, certificate. The combination name and node_id needs to be unique across token-based and certificate-based principal identities.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param principalIdentityWithCertificate
+
+@return PrincipalIdentity
+*/
+func (a *NsxComponentAdministrationApiService) RegisterPrincipalIdentityWithCertificate(ctx context.Context, principalIdentityWithCertificate trust.PrincipalIdentityWithCertificate) (trust.PrincipalIdentity, *http.Response, error) {
+	var (
+		localVarHttpMethod  = strings.ToUpper("Post")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
+		localVarReturnValue trust.PrincipalIdentity
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/trust-management/principal-identities/with-certificate"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	// body params
+	localVarPostBody = &principalIdentityWithCertificate
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+
+		if localVarHttpResponse.StatusCode == 201 {
+			var v trust.PrincipalIdentity
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
 }
