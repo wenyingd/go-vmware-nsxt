@@ -32,23 +32,24 @@ type ClientRetriesConfiguration struct {
 }
 
 type Configuration struct {
-	BasePath             string `json:"basePath,omitempty"`
-	Host                 string `json:"host,omitempty"`
-	Scheme               string `json:"scheme,omitempty"`
-	UserName             string
-	Password             string
-	RemoteAuth           bool
-	DefaultHeader        map[string]string `json:"defaultHeader,omitempty"`
-	UserAgent            string            `json:"userAgent,omitempty"`
-	ClientAuthCertFile   string
-	ClientAuthKeyFile    string
-	CAFile               string
-	ClientAuthCertString string
-	ClientAuthKeyString  string
-	CAString             string
-	Insecure             bool
-	RetriesConfiguration ClientRetriesConfiguration
-	HTTPClient           *http.Client
+	BasePath                     string `json:"basePath,omitempty"`
+	Host                         string `json:"host,omitempty"`
+	Scheme                       string `json:"scheme,omitempty"`
+	UserName                     string
+	Password                     string
+	RemoteAuth                   bool
+	DefaultHeader                map[string]string `json:"defaultHeader,omitempty"`
+	UserAgent                    string            `json:"userAgent,omitempty"`
+	ClientAuthCertFile           string
+	ClientAuthKeyFile            string
+	CAFile                       string
+	ClientAuthCertString         string
+	ClientAuthKeyString          string
+	CAString                     string
+	Insecure                     bool
+	RetriesConfiguration         ClientRetriesConfiguration
+	HTTPClient                   *http.Client
+	InsecureSkipServerNameVerify bool
 }
 
 func NewConfiguration() *Configuration {

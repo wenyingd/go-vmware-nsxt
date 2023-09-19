@@ -102,7 +102,7 @@ func GetContext(cfg *Configuration) context.Context {
 	return context.Background()
 }
 
-//Perform 'session create' and save the xsrf & session id to the default headers
+// Perform 'session create' and save the xsrf & session id to the default headers
 func GetDefaultHeaders(client *APIClient) error {
 
 	XSRF_TOKEN := "X-XSRF-TOKEN"
@@ -179,8 +179,8 @@ func GetDefaultHeaders(client *APIClient) error {
 func InitHttpClient(cfg *Configuration) error {
 
 	tlsConfig := &tls.Config{
-		//MinVersion:               tls.VersionTLS12,
-		//PreferServerCipherSuites: true,
+		// MinVersion:               tls.VersionTLS12,
+		// PreferServerCipherSuites: true,
 		InsecureSkipVerify: cfg.Insecure,
 	}
 
@@ -228,6 +228,35 @@ func InitHttpClient(cfg *Configuration) error {
 		caCertPool.AppendCertsFromPEM([]byte(cfg.CAString))
 
 		tlsConfig.RootCAs = caCertPool
+	}
+
+	if cfg.InsecureSkipServerNameVerify {
+		tlsConfig.InsecureSkipVerify = true
+		tlsConfig.VerifyPeerCertificate = func(rawCerts [][]byte, verifiedChains [][]*x509.Certificate) error {
+			// verifiedChains will be nil as the InsecureSkipVerify was set to true
+			certs := make([]*x509.Certificate, len(rawCerts))
+			for i, data := range rawCerts {
+				cert, err := x509.ParseCertificate(data)
+				if err != nil {
+					return fmt.Errorf("failed to parse certificate: %w", err)
+				}
+				certs[i] = cert
+			}
+
+			opts := x509.VerifyOptions{
+				Roots:         tlsConfig.RootCAs,
+				Intermediates: x509.NewCertPool(),
+			}
+
+			for _, cert := range certs[1:] {
+				opts.Intermediates.AddCert(cert)
+			}
+
+			if _, err := certs[0].Verify(opts); err != nil {
+				return fmt.Errorf("failed to verify certificate: %w", err)
+			}
+			return nil
+		}
 	}
 
 	transport := &http.Transport{Proxy: http.ProxyFromEnvironment,
@@ -520,7 +549,7 @@ func (c *APIClient) prepareRequest(
 		}
 		if len(fileBytes) > 0 && fileName != "" {
 			w.Boundary()
-			//_, fileNm := filepath.Split(fileName)
+			// _, fileNm := filepath.Split(fileName)
 			part, err := w.CreateFormFile("file", filepath.Base(fileName))
 			if err != nil {
 				return nil, err
