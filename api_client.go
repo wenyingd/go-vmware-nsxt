@@ -615,6 +615,10 @@ func (c *APIClient) prepareRequest(
 	// Add the user agent to the request.
 	localVarRequest.Header.Add("User-Agent", c.cfg.UserAgent)
 
+	if c.cfg.OverwriteProtection && (method == http.MethodPatch || method == http.MethodDelete) {
+		localVarRequest.Header.Add("X-Allow-Overwrite", "true")
+	}
+
 	// Walk through any authentication.
 	if ctx != nil {
 		// OAuth2 authentication
